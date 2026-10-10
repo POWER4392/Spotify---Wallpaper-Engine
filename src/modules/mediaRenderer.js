@@ -234,6 +234,10 @@ export function updateBridgeStatusUI(connected, text) {
             ? `<span style="color:#1ed760;">Connected: ${text}</span>`
             : `<span style="color:#ff5555;"> ${text}</span>`;
     }
+    const alertBox = document.getElementById("we-bridge-alert-box");
+    if (alertBox) {
+        alertBox.style.display = connected ? "none" : "block";
+    }
 }
 
 export function startAutoSyncWatcher() {

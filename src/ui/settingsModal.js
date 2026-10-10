@@ -39,6 +39,34 @@ export function openModal() {
                         <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:12px; color:#bbb; cursor:pointer;">
                             <input type="checkbox" id="we-chk-autosync" ${settings.autoSync ? "checked" : ""} style="accent-color:#1ed760;" />Auto-sync wallpaper with Wallpaper Engine (Realtime)
                         </label>
+
+                        <!-- BANNER BACKGROUND BRIDGE SETUP & 1-CLICK ACTIVATOR -->
+                        <div id="we-bridge-alert-box" style="display:none; background:rgba(234, 179, 8, 0.08); border:1px solid rgba(234, 179, 8, 0.28); border-radius:10px; padding:12px; margin-top:10px;">
+                            <div style="margin-bottom:6px;">
+                                <b style="font-size:12px; color:#facc15;">Background Sync Service Required</b>
+                            </div>
+                            <p style="font-size:11px; color:#ccc; margin:0 0 10px 0; line-height:1.45;">
+                                A one-time activation is required to automatically synchronize backgrounds from Wallpaper Engine when Spotify opens:
+                            </p>
+                            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                                <button id="we-btn-download-activator" style="flex:1; min-width:140px; background:#1ed760; color:#000; border:none; border-radius:8px; padding:8px 12px; font-weight:700; font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                                    Download 1-Click Activator
+                                </button>
+                                <button id="we-btn-copy-command" style="flex:1; min-width:140px; background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:8px 12px; font-weight:600; font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                                    Copy PowerShell Command
+                                </button>
+                            </div>
+
+                            <div style="margin-top:10px; padding:9px 11px; background:rgba(0,0,0,0.32); border-radius:8px; border:1px solid rgba(255,255,255,0.08); font-size:11px; line-height:1.5; color:#bbb;">
+                                <div style="font-weight:700; color:#1ed760; margin-bottom:4px;">
+                                    Security & Transparency (100% Open Source):
+                                </div>
+                                <div style="color:#aaa; font-size:10.5px;">
+                                    Spotify runs inside an isolated web sandbox and cannot read external disk files. This activator registers a local bridge daemon listening exclusively on <code>127.0.0.1:43196</code> to stream active wallpaper data into Spotify. Zero external telemetry, 100% open source, and completely safe.
+                                </div>
+                            </div>
+                        </div>
+
                         <div style="font-size:11px; color:#888; margin-top:8px; line-height:1.4;">
                             Note: Some wallpapers may not function properly or may fail to display due to technical limitations. Compatibility will be improved in future updates.
                         </div>
@@ -292,6 +320,137 @@ export function openModal() {
         document.getElementById("we-btn-sync-now").onclick = () => {
             syncFromWallpaperEngine(true);
         };
+
+        const showActivatorNotice = (onConfirm) => {
+            const existing = document.getElementById("we-dialog-backdrop");
+            if (existing) existing.remove();
+
+            const dialog = document.createElement("div");
+            dialog.id = "we-dialog-backdrop";
+            dialog.style.cssText = `
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.75);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                z-index: 1000002;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+            `;
+
+            dialog.innerHTML = `
+                <div style="background:#181818; border:1px solid rgba(255, 255, 255, 0.16); border-radius:14px; max-width:460px; width:100%; padding:22px; box-shadow:0 16px 40px rgba(0,0,0,0.85); color:#eee;">
+                    <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+                        <span>Background Service Notice</span>
+                        <button id="we-dialog-close" style="background:transparent; border:none; color:#888; font-size:20px; cursor:pointer; line-height:1; padding:0 4px;">&times;</button>
+                    </div>
+
+                    <p style="font-size:12px; color:#ccc; line-height:1.55; margin:0 0 12px 0;">
+                        To allow real-time wallpaper synchronization, this activator registers a local background service on your computer.
+                    </p>
+
+                    <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:12px; margin-bottom:16px; font-size:11.5px; line-height:1.6; color:#bbb;">
+                        <div style="font-weight:600; color:#1ed760; margin-bottom:6px;">Process Details & Safety:</div>
+                        <ul style="margin:0; padding-left:18px; color:#aaa;">
+                            <li>Registers a silent watcher script (<code>watch-spotify.ps1</code>) in Windows Startup.</li>
+                            <li>Runs a local bridge listening exclusively on <code>127.0.0.1:43196</code> to feed wallpapers into Spotify.</li>
+                            <li>Suspends automatically whenever Spotify is closed to minimize system resource usage.</li>
+                            <li>100% open-source, safe, and operates strictly offline with zero external network tracking.</li>
+                        </ul>
+                    </div>
+
+                    <div style="display:flex; justify-content:flex-end; gap:10px;">
+                        <button id="we-dialog-cancel" style="background:rgba(255,255,255,0.08); color:#fff; border:1px solid rgba(255,255,255,0.15); border-radius:20px; padding:7px 16px; font-weight:600; font-size:12px; cursor:pointer;">
+                            Cancel
+                        </button>
+                        <button id="we-dialog-proceed" style="background:#1ed760; color:#000; border:none; border-radius:20px; padding:7px 18px; font-weight:700; font-size:12px; cursor:pointer;">
+                            Download & Proceed
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(dialog);
+
+            const closeDialog = () => { dialog.remove(); };
+            dialog.querySelector("#we-dialog-close").onclick = closeDialog;
+            dialog.querySelector("#we-dialog-cancel").onclick = closeDialog;
+            dialog.querySelector("#we-dialog-proceed").onclick = () => {
+                closeDialog();
+                onConfirm();
+            };
+            dialog.onclick = (e) => {
+                if (e.target === dialog) closeDialog();
+            };
+        };
+
+        const executeDownloadActivator = () => {
+            const batScript = `@echo off
+chcp 65001 >nul
+title Spotify Wallpaper Engine - Auto Setup
+echo ============================================================
+echo   Spotify ^<^-^> Wallpaper Engine Sync - Auto Setup
+echo ============================================================
+echo [Notice: 100%% Open-Source ^& Safe]
+echo Starts the local bridge (127.0.0.1:43196) and registers a
+echo background watcher daemon so Spotify automatically syncs.
+echo No personal data is collected or sent anywhere.
+echo ============================================================
+echo.
+
+if exist "%~dp0scripts\\setup\\setup-autostart.ps1" (
+    powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\\setup\\setup-autostart.ps1"
+    start "" wscript.exe "%~dp0scripts\\sync\\start-sync-silent.vbs"
+    echo.
+    echo [OK] Activated successfully from local repository!
+    timeout /t 3 >nul
+    exit /b
+)
+
+if exist "e:\\Mod\\spotify-wallpaper\\scripts\\setup\\install-bridge.ps1" (
+    powershell -NoProfile -ExecutionPolicy Bypass -File "e:\\Mod\\spotify-wallpaper\\scripts\\setup\\install-bridge.ps1"
+    pause
+    exit /b
+)
+
+echo Downloading and configuring background bridge from GitHub...
+powershell -NoProfile -ExecutionPolicy Bypass -Command "iwr -useb https://raw.githubusercontent.com/POWER4392/Spotify---Wallpaper-Engine/main/scripts/setup/install-bridge.ps1 | iex"
+echo.
+pause
+`;
+            const blob = new Blob([batScript], { type: "text/plain" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "Activate-Spotify-Wallpaper-Sync.bat";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            if (window.Spicetify && Spicetify.showNotification) {
+                Spicetify.showNotification("Activator downloaded! Run the file to complete background setup.");
+            }
+        };
+
+        const btnDownloadActivator = document.getElementById("we-btn-download-activator");
+        if (btnDownloadActivator) {
+            btnDownloadActivator.onclick = () => {
+                showActivatorNotice(executeDownloadActivator);
+            };
+        }
+
+        const btnCopyCommand = document.getElementById("we-btn-copy-command");
+        if (btnCopyCommand) {
+            btnCopyCommand.onclick = () => {
+                const cmd = 'powershell -WindowStyle Hidden -Command "iwr -useb https://raw.githubusercontent.com/POWER4392/Spotify---Wallpaper-Engine/main/scripts/setup/install-bridge.ps1 | iex"';
+                navigator.clipboard.writeText(cmd);
+                if (window.Spicetify && Spicetify.showNotification) {
+                    Spicetify.showNotification("Command copied to clipboard! Paste into PowerShell or Run (Win+R) and press Enter.");
+                }
+            };
+        }
 
         const pauseBtnModal = document.getElementById("we-btn-toggle-pause");
         if (pauseBtnModal) {

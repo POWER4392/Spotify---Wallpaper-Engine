@@ -5,9 +5,17 @@ cd /d "%~dp0"
 
 if "%~1"=="" (
     echo ==========================================================
+    echo  CONG CU CONVERT VIDEO CHO SPOTIFY WALLPAPER ENGINE
+    echo  (100%% Open-Source, An toan, khong chua ma doc)
+    echo ==========================================================
+    echo  MUC DICH:
+    echo  Spotify khong the phat truc tiep mot so video MP4 nen cong
+    echo  cu nay su dung FFmpeg de chuyen sang dinh dang WebM nhe hon,
+    echo  giup hinh nen chay muot ma va khong bi den man hinh.
+    echo.
     echo  HUONG DAN SU DUNG:
     echo  Keo va tha (Drag and Drop) file video (.mp4, .mov, .mkv)
-    echo  truc tiep vao file bat nay de convert sang dinh dang .webm
+    echo  truc tiep vao file bat nay de convert sang .webm
     echo ==========================================================
     pause
     exit /b

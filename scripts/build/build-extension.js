@@ -64,6 +64,13 @@ function buildBundle() {
             const dest = path.join(spicetifyExtDir, 'wallpaper-engine.js');
             fs.copyFileSync(distPath, dest);
             console.log(`[Deploy] Copied bundle to Spicetify Extensions: ${dest}`);
+            try {
+                const { execSync } = require('child_process');
+                execSync('spicetify refresh -e', { stdio: 'pipe' });
+                console.log(`[Deploy] Auto-refreshed Spicetify extensions!`);
+            } catch (e) {
+                console.warn(`[Deploy] Could not auto-refresh spicetify:`, e.message);
+            }
         }
     }
 }
