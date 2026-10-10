@@ -218,9 +218,9 @@ export async function syncFromWallpaperEngine(manual = false) {
             updateBridgeStatusUI(false, "No wallpaper found");
         }
     } catch (e) {
-        updateBridgeStatusUI(false, "Bridge is not running (start-sync.bat)");
+        updateBridgeStatusUI(false, "Bridge is not running");
         if (manual && window.Spicetify && Spicetify.showNotification) {
-            Spicetify.showNotification("Bridge is not running (start-sync.bat)");
+            Spicetify.showNotification("Bridge is not running");
         }
     } finally {
         isSyncing = false;

@@ -39,7 +39,6 @@ if (Test-Path (Join-Path $localRepoRoot "scripts\sync\sync-wallpaper.ps1")) {
 
         Copy-Item -Path (Join-Path $sourceDir "scripts") -Destination $targetDir -Recurse -Force
         Copy-Item -Path (Join-Path $sourceDir "tools") -Destination $targetDir -Recurse -Force
-        Copy-Item -Path (Join-Path $sourceDir "start-sync.bat") -Destination $targetDir -Force
 
         Remove-Item -Path $zipPath -Force
         Remove-Item -Path $extractTemp -Recurse -Force
