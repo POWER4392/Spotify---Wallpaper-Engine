@@ -1,0 +1,458 @@
+import { settings, saveSettings, saveMedia } from '../modules/settings.js';
+import { renderMedia, syncFromWallpaperEngine, toggleWallpaperPause, setWallpaperSource } from '../modules/mediaRenderer.js';
+
+export function openModal() {
+        if (document.getElementById("we-modal-overlay")) return;
+
+        const overlay = document.createElement("div");
+        overlay.id = "we-modal-overlay";
+        overlay.innerHTML = `
+            <div class="we-dialog">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                    <h2 style="margin:0; font-size:1.15rem; font-weight:700;">Wallpaper Engine & Dimensions</h2>
+                    <button id="we-close"style="background:none; border:none; color:#aaa; font-size:24px; cursor:pointer;">&times;</button>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:12px; margin-bottom:14px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <span style="font-weight:700; font-size:13px;">Wallpaper Source:</span>
+                        <span id="we-current-source-badge" style="font-size:11px; padding:2px 8px; border-radius:12px; background:${settings.wallpaperSource === 'custom-video' ? 'rgba(80,155,245,0.15)' : 'rgba(30,215,96,0.15)'}; color:${settings.wallpaperSource === 'custom-video' ? '#509bf5' : '#1ed760'}; font-weight:600;">
+                            ${settings.wallpaperSource === "custom-video" ? "Custom Video" : "Wallpaper Engine"}
+                        </span>
+                    </div>
+
+                    <div class="we-btn-group" id="we-source-group" style="margin-bottom:12px;">
+                        <button class="we-btn-pill ${settings.wallpaperSource !== 'custom-video' ? 'active' : ''}" id="we-btn-src-we" data-source="wallpaper-engine">
+                            Wallpaper Engine
+                        </button>
+                        <button class="we-btn-pill ${settings.wallpaperSource === 'custom-video' ? 'active' : ''}" id="we-btn-src-custom" data-source="custom-video">
+                            Custom Video / File
+                        </button>
+                    </div>
+
+                    <div id="we-panel-we" style="display:${settings.wallpaperSource !== 'custom-video' ? 'block' : 'none'};">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <span style="font-size:12px; color:#aaa;">Connection:</span>
+                            <div id="we-bridge-status" style="font-size:12px;">Checking connection...</div>
+                        </div>
+                        <button class="we-btn-sync" id="we-btn-sync-now">Sync from Wallpaper Engine Now</button>
+                        <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:12px; color:#bbb; cursor:pointer;">
+                            <input type="checkbox" id="we-chk-autosync" ${settings.autoSync ? "checked" : ""} style="accent-color:#1ed760;" />Auto-sync wallpaper with Wallpaper Engine (Realtime)
+                        </label>
+                        <div style="font-size:11px; color:#888; margin-top:8px; line-height:1.4;">
+                            Note: Some wallpapers may not function properly or may fail to display due to technical limitations. Compatibility will be improved in future updates.
+                        </div>
+                    </div>
+
+                    <div id="we-panel-custom" style="display:${settings.wallpaperSource === 'custom-video' ? 'block' : 'none'};">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <span style="font-size:12px; color:#aaa;">Active Media:</span>
+                            <span id="we-custom-name" style="font-size:12px; color:#509bf5; font-weight:600; text-overflow:ellipsis; overflow:hidden; max-width:230px; white-space:nowrap;">
+                                ${settings.customMediaName || settings.mediaName || "No file selected"}
+                            </span>
+                        </div>
+                        <button class="we-btn-sync" id="we-btn-pick-custom" style="background:#2e77d0; color:#fff;">
+                            Select / Change Video or Image
+                        </button>
+                        <input type="file" id="we-file" accept="video/webm,video/mp4,image/gif,image/jpeg,image/png,image/webp" style="display:none;" />
+                        <div style="font-size:11px; color:#aaa; margin-top:6px; text-align:center; line-height:1.4;">
+                            Supports <code>.webm</code> videos, <code>.gif</code> animations, and <code>.png, .jpg, .webp</code> images.<br>
+                            <span style="color:#eab308; font-size:10px;">(Note: MP4 files require conversion to .webm via tools/convert-to-webm.bat for live playback)</span>
+                        </div>
+                    </div>
+
+                    <button class="we-btn-pill ${settings.wallpaperPaused ? 'active' : ''}" id="we-btn-toggle-pause" style="margin-top:10px; width:100%; display:flex; align-items:center; justify-content:center; gap:8px;">
+                        ${settings.wallpaperPaused ? 'Resume Video / Wallpaper' : 'Pause Video / Wallpaper'}
+                    </button>
+                </div>
+
+                
+                <div style="background:rgba(30,215,96,0.06); border:1px solid rgba(30,215,96,0.25); border-radius:10px; padding:12px; margin-bottom:14px;">
+                    <div style="font-weight:700; font-size:13px; color:#1ed760; margin-bottom:8px;">Wallpaper Size & Position:</div>
+
+                    <div class="we-row"style="margin-bottom:8px !important;">
+                        <label><span>Display Fit Mode:</span></label>
+                        <div class="we-btn-group"id="we-fit-group">
+                            <button class="we-btn-pill ${settings.fitMode === 'cover' ? 'active' : ''}"data-val="cover">Cover (Fill Frame)</button>
+                            <button class="we-btn-pill ${settings.fitMode === 'contain' ? 'active' : ''}"data-val="contain">Contain (Fit All)</button>
+                            <button class="we-btn-pill ${settings.fitMode === 'fill' ? 'active' : ''}"data-val="fill">Stretch (Fill)</button>
+                        </div>
+                    </div>
+
+                    <div class="we-row"style="margin-bottom:8px !important;">
+                        <label><span>Focus Alignment:</span></label>
+                        <div class="we-btn-group"id="we-pos-group">
+                            <button class="we-btn-pill ${settings.position === 'top' ? 'active' : ''}"data-val="top">Top (Focus Head)</button>
+                            <button class="we-btn-pill ${settings.position === 'center' ? 'active' : ''}"data-val="center">Center</button>
+                            <button class="we-btn-pill ${settings.position === 'bottom' ? 'active' : ''}"data-val="bottom">Bottom</button>
+                        </div>
+                    </div>
+
+                    <div class="we-row"style="margin-bottom:0 !important;">
+                        <label><span>Zoom:</span>
+                            <b id="we-zoom-val">${settings.zoom || 100}%</b>
+                        </label>
+                        <input type="range"class="we-slider"id="we-zoom"min="60"max="160"value="${settings.zoom || 100}">
+                    </div>
+                </div>
+
+                
+                <div class="we-row">
+                    <label><span>Wallpaper Blur:</span>
+                        <b id="we-bl-val">${settings.bgBlur || 0}px</b>
+                    </label>
+                    <input type="range"class="we-slider"id="we-bl"min="0"max="30"value="${settings.bgBlur || 0}">
+                </div>
+
+                <div class="we-row">
+                    <label><span>Spotify Darkness:</span>
+                        <b id="we-op-val">${Math.round(settings.opacity * 100)}%</b>
+                    </label>
+                    <input type="range"class="we-slider"id="we-op"min="0"max="90"value="${settings.opacity * 100}">
+                </div>
+
+                
+                <div style="background:rgba(255, 75, 75, 0.08); border:1px solid rgba(255, 75, 75, 0.25); border-radius:10px; padding:12px; margin-bottom:13px;">
+                    <div style="font-weight:700; font-size:13px; color:#ff6b6b; margin-bottom:8px;">Header & Banner Opacity:</div>
+                    
+                    <div class="we-row"style="margin-bottom:8px !important;">
+                        <label><span>Header Opacity (0% = Fully Transparent):</span>
+                            <b id="we-header-op-val">${Math.round((settings.headerOpacity !== undefined ? settings.headerOpacity : 0.35) * 100)}%</b>
+                        </label>
+                        <input type="range"class="we-slider"id="we-header-op"min="0"max="100"value="${Math.round((settings.headerOpacity !== undefined ? settings.headerOpacity : 0.35) * 100)}">
+                    </div>
+
+                    <div class="we-row"style="margin-bottom:0 !important;">
+                        <label><span>Header Glass Blur:</span>
+                            <b id="we-header-bl-val">${settings.headerBlur || 0}px</b>
+                        </label>
+                        <input type="range"class="we-slider"id="we-header-bl"min="0"max="25"value="${settings.headerBlur || 0}">
+                    </div>
+                </div>
+
+                
+                <div style="background:rgba(168, 85, 247, 0.08); border:1px solid rgba(168, 85, 247, 0.25); border-radius:10px; padding:12px; margin-bottom:13px;">
+                    <div style="font-weight:700; font-size:13px; color:#c084fc; margin-bottom:8px;">Top Navigation Bar (Top Bar):</div>
+
+                    <div class="we-row"style="margin-bottom:8px !important;">
+                        <label><span>Top Bar Background Opacity (0% = Fully Transparent):</span>
+                            <b id="we-topbar-op-val">${Math.round((settings.topBarOpacity !== undefined ? settings.topBarOpacity : 0) * 100)}%</b>
+                        </label>
+                        <input type="range"class="we-slider"id="we-topbar-op"min="0"max="100"value="${Math.round((settings.topBarOpacity !== undefined ? settings.topBarOpacity : 0) * 100)}"style="accent-color:#c084fc;">
+                    </div>
+
+                    <div class="we-row"style="margin-bottom:0 !important;">
+                        <label><span>Top Bar Glass Blur:</span>
+                            <b id="we-topbar-bl-val">${settings.topBarBlur || 0}px</b>
+                        </label>
+                        <input type="range"class="we-slider"id="we-topbar-bl"min="0"max="25"value="${settings.topBarBlur || 0}"style="accent-color:#c084fc;">
+                    </div>
+                </div>
+
+                
+                <div style="background:rgba(29, 185, 84, 0.08); border:1px solid rgba(29, 185, 84, 0.25); border-radius:10px; padding:12px; margin-bottom:13px;">
+                    <div style="font-weight:700; font-size:13px; color:#1ed760; margin-bottom:8px;">Sidebar & Bottom Player Bar:</div>
+                    
+                    <div class="we-row"style="margin-bottom:8px !important;">
+                        <label><span>Sidebar Background Opacity (0% = Fully Transparent):</span>
+                            <b id="we-sidebar-op-val">${Math.round((settings.sidebarOpacity !== undefined ? settings.sidebarOpacity : 0) * 100)}%</b>
+                        </label>
+                        <input type="range"class="we-slider"id="we-sidebar-op"min="0"max="100"value="${Math.round((settings.sidebarOpacity !== undefined ? settings.sidebarOpacity : 0) * 100)}">
+                    </div>
+
+                    <div class="we-row"style="margin-bottom:0 !important;">
+                        <label><span>Player Bar Background Opacity (0% = Fully Transparent):</span>
+                            <b id="we-player-op-val">${Math.round((settings.playerOpacity !== undefined ? settings.playerOpacity : 0) * 100)}%</b>
+                        </label>
+                        <input type="range"class="we-slider"id="we-player-op"min="0"max="100"value="${Math.round((settings.playerOpacity !== undefined ? settings.playerOpacity : 0) * 100)}">
+                    </div>
+                </div>
+
+                
+                <div style="background:rgba(80, 155, 245, 0.08); border:1px solid rgba(80, 155, 245, 0.25); border-radius:10px; padding:12px; margin-bottom:13px;">
+                    <div style="font-weight:700; font-size:13px; color:#509bf5; margin-bottom:8px;">Search Dropdown Color & Opacity:</div>
+                    
+                    <div class="we-row"style="margin-bottom:8px !important;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;"><span style="font-size:13px; color:#ccc;">Search background color:</span>
+                            <div style="display:flex; align-items:center; gap:8px;"><span id="we-search-color-hex"style="font-size:12px; color:#888; font-family:monospace;">${settings.searchBgColor || '#181818'}</span>
+                                <input type="color"id="we-search-color"value="${settings.searchBgColor || '#181818'}"style="width:36px; height:28px; border:none; border-radius:6px; cursor:pointer; background:transparent; padding:0;" />
+                            </div>
+                        </div>
+                        <div class="we-btn-group"id="we-search-presets"style="flex-wrap:wrap; gap:6px;">
+                            <button class="we-btn-pill"data-col="#181818"style="background:#181818; border-color:#444;">Default</button>
+                            <button class="we-btn-pill"data-col="#101010"style="background:#101010; border-color:#333;">Pitch Black</button>
+                            <button class="we-btn-pill"data-col="#0f172a"style="background:#0f172a; border-color:#1e293b;">Navy Dark</button>
+                            <button class="we-btn-pill"data-col="#0d1f18"style="background:#0d1f18; border-color:#133327;">Dark Pine</button>
+                            <button class="we-btn-pill"data-col="#1a0d24"style="background:#1a0d24; border-color:#2a143b;">Deep Purple</button>
+                        </div>
+                    </div>
+
+                    <div class="we-row"style="margin-bottom:0 !important;">
+                        <label><span>Search Dropdown Opacity:</span>
+                            <b id="we-search-op-val">${Math.round((settings.searchBgOpacity !== undefined ? settings.searchBgOpacity : 0.96) * 100)}%</b>
+                        </label>
+                        <input type="range"class="we-slider"id="we-search-op"min="70"max="100"value="${Math.round((settings.searchBgOpacity !== undefined ? settings.searchBgOpacity : 0.96) * 100)}">
+                    </div>
+                </div>
+
+                <div class="we-row">
+                    <label><span>Wallpaper Brightness:</span>
+                        <b id="we-br-val">${settings.brightness}%</b>
+                    </label>
+                    <input type="range"class="we-slider"id="we-br"min="20"max="150"value="${settings.brightness}">
+                </div>
+
+                <div style="display:flex; justify-content:flex-end; margin-top:8px;">
+                    <button id="we-ok"style="background:#1ed760; color:#000; border:none; padding:8px 24px; border-radius:20px; font-weight:700; cursor:pointer;">Close</button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(overlay);
+
+        let onPauseChanged = null;
+        const close = () => {
+            if (onPauseChanged) window.removeEventListener("we-pause-changed", onPauseChanged);
+            overlay.remove();
+        };
+        document.getElementById("we-close").onclick = close;
+        document.getElementById("we-ok").onclick = close;
+        overlay.onclick = (e) => { if (e.target === overlay) close(); };
+
+        const updateSourceUI = () => {
+            const isCustom = settings.wallpaperSource === "custom-video";
+            const badge = document.getElementById("we-current-source-badge");
+            if (badge) {
+                badge.textContent = isCustom ? "Custom Video" : "Wallpaper Engine";
+                badge.style.color = isCustom ? "#509bf5" : "#1ed760";
+                badge.style.background = isCustom ? "rgba(80, 155, 245, 0.15)" : "rgba(30, 215, 96, 0.15)";
+            }
+            const btnWe = document.getElementById("we-btn-src-we");
+            const btnCustom = document.getElementById("we-btn-src-custom");
+            if (btnWe && btnCustom) {
+                btnWe.classList.toggle("active", !isCustom);
+                btnCustom.classList.toggle("active", isCustom);
+            }
+            const panelWe = document.getElementById("we-panel-we");
+            const panelCustom = document.getElementById("we-panel-custom");
+            if (panelWe) panelWe.style.display = !isCustom ? "block" : "none";
+            if (panelCustom) panelCustom.style.display = isCustom ? "block" : "none";
+            const customName = document.getElementById("we-custom-name");
+            if (customName) {
+                customName.textContent = settings.customMediaName || settings.mediaName || "No file selected";
+            }
+        };
+
+        const btnSrcWe = document.getElementById("we-btn-src-we");
+        if (btnSrcWe) {
+            btnSrcWe.onclick = async () => {
+                await setWallpaperSource("wallpaper-engine");
+                updateSourceUI();
+            };
+        }
+
+        const btnSrcCustom = document.getElementById("we-btn-src-custom");
+        if (btnSrcCustom) {
+            btnSrcCustom.onclick = async () => {
+                await setWallpaperSource("custom-video");
+                updateSourceUI();
+            };
+        }
+
+        const btnPickCustom = document.getElementById("we-btn-pick-custom");
+        const fileInput = document.getElementById("we-file");
+        if (btnPickCustom && fileInput) {
+            btnPickCustom.onclick = () => fileInput.click();
+        }
+
+        if (fileInput) {
+            fileInput.onchange = (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    const file = e.target.files[0];
+                    const type = file.type || (file.name.match(/\.(mp4|webm|mkv|mov)$/i) ? "video/mp4" : "image/jpeg");
+                    saveMedia(file, file.name, type);
+                    renderMedia(file, type);
+                    updateSourceUI();
+                    if (window.Spicetify && Spicetify.showNotification) {
+                        Spicetify.showNotification("Loaded: " + file.name);
+                    }
+                }
+            };
+        }
+
+        if (settings.wallpaperSource === "wallpaper-engine") {
+            if (settings.mediaName && settings.mediaName !== "No file selected") {
+                updateBridgeStatusUI(true, settings.mediaName);
+            }
+            syncFromWallpaperEngine(false);
+        } else {
+            updateBridgeStatusUI(true, "Custom Video: " + (settings.customMediaName || settings.mediaName || "Active"));
+        }
+
+        document.getElementById("we-btn-sync-now").onclick = () => {
+            syncFromWallpaperEngine(true);
+        };
+
+        const pauseBtnModal = document.getElementById("we-btn-toggle-pause");
+        if (pauseBtnModal) {
+            pauseBtnModal.onclick = () => {
+                toggleWallpaperPause();
+                pauseBtnModal.textContent = settings.wallpaperPaused ? 'Resume Video / Wallpaper' : 'Pause Video / Wallpaper';
+                if (settings.wallpaperPaused) {
+                    pauseBtnModal.classList.add("active");
+                } else {
+                    pauseBtnModal.classList.remove("active");
+                }
+            };
+        }
+
+        onPauseChanged = (e) => {
+            if (pauseBtnModal) {
+                pauseBtnModal.textContent = settings.wallpaperPaused ? 'Resume Video / Wallpaper' : 'Pause Video / Wallpaper';
+                if (settings.wallpaperPaused) {
+                    pauseBtnModal.classList.add("active");
+                } else {
+                    pauseBtnModal.classList.remove("active");
+                }
+            }
+        };
+        window.addEventListener("we-pause-changed", onPauseChanged);
+
+        document.getElementById("we-chk-autosync").onchange = (e) => {
+            settings.autoSync = e.target.checked;
+            saveSettings();
+        };
+
+        document.querySelectorAll("#we-fit-group .we-btn-pill").forEach((btn) => {
+            btn.onclick = () => {
+                document.querySelectorAll("#we-fit-group .we-btn-pill").forEach(b =>b.classList.remove("active"));
+                btn.classList.add("active");
+                settings.fitMode = btn.getAttribute("data-val");
+                saveSettings();
+            };
+        });
+
+        document.querySelectorAll("#we-pos-group .we-btn-pill").forEach((btn) => {
+            btn.onclick = () => {
+                document.querySelectorAll("#we-pos-group .we-btn-pill").forEach(b =>b.classList.remove("active"));
+                btn.classList.add("active");
+                settings.position = btn.getAttribute("data-val");
+                saveSettings();
+            };
+        });
+
+        const sliderZoom = document.getElementById("we-zoom");
+        sliderZoom.oninput = (e) => {
+            settings.zoom = parseInt(e.target.value);
+            document.getElementById("we-zoom-val").textContent = e.target.value + "%";
+            saveSettings();
+        };
+
+        const sliderBl = document.getElementById("we-bl");
+        sliderBl.oninput = (e) => {
+            settings.bgBlur = parseInt(e.target.value);
+            document.getElementById("we-bl-val").textContent = e.target.value + "px";
+            saveSettings();
+        };
+        const sliderOp = document.getElementById("we-op");
+        sliderOp.oninput = (e) => {
+            settings.opacity = parseInt(e.target.value) / 100;
+            document.getElementById("we-op-val").textContent = e.target.value + "%";
+            saveSettings();
+        };
+
+        const sliderHeaderOp = document.getElementById("we-header-op");
+        if (sliderHeaderOp) {
+            sliderHeaderOp.oninput = (e) => {
+                settings.headerOpacity = parseInt(e.target.value) / 100;
+                document.getElementById("we-header-op-val").textContent = e.target.value + "%";
+                saveSettings();
+            };
+        }
+
+        const sliderHeaderBl = document.getElementById("we-header-bl");
+        if (sliderHeaderBl) {
+            sliderHeaderBl.oninput = (e) => {
+                settings.headerBlur = parseInt(e.target.value);
+                document.getElementById("we-header-bl-val").textContent = e.target.value + "px";
+                saveSettings();
+            };
+        }
+
+        const sliderTopBarOp = document.getElementById("we-topbar-op");
+        if (sliderTopBarOp) {
+            sliderTopBarOp.oninput = (e) => {
+                settings.topBarOpacity = parseInt(e.target.value) / 100;
+                document.getElementById("we-topbar-op-val").textContent = e.target.value + "%";
+                saveSettings();
+            };
+        }
+
+        const sliderTopBarBl = document.getElementById("we-topbar-bl");
+        if (sliderTopBarBl) {
+            sliderTopBarBl.oninput = (e) => {
+                settings.topBarBlur = parseInt(e.target.value);
+                document.getElementById("we-topbar-bl-val").textContent = e.target.value + "px";
+                saveSettings();
+            };
+        }
+
+        const sliderSidebarOp = document.getElementById("we-sidebar-op");
+        if (sliderSidebarOp) {
+            sliderSidebarOp.oninput = (e) => {
+                settings.sidebarOpacity = parseInt(e.target.value) / 100;
+                document.getElementById("we-sidebar-op-val").textContent = e.target.value + "%";
+                saveSettings();
+            };
+        }
+
+        const sliderPlayerOp = document.getElementById("we-player-op");
+        if (sliderPlayerOp) {
+            sliderPlayerOp.oninput = (e) => {
+                settings.playerOpacity = parseInt(e.target.value) / 100;
+                document.getElementById("we-player-op-val").textContent = e.target.value + "%";
+                saveSettings();
+            };
+        }
+
+        const searchColorInput = document.getElementById("we-search-color");
+        if (searchColorInput) {
+            searchColorInput.oninput = (e) => {
+                settings.searchBgColor = e.target.value;
+                const hexLabel = document.getElementById("we-search-color-hex");
+                if (hexLabel) hexLabel.textContent = e.target.value;
+                saveSettings();
+            };
+        }
+
+        document.querySelectorAll("#we-search-presets button").forEach(btn => {
+            btn.onclick = () => {
+                const col = btn.getAttribute("data-col");
+                if (col) {
+                    settings.searchBgColor = col;
+                    if (searchColorInput) searchColorInput.value = col;
+                    const hexLabel = document.getElementById("we-search-color-hex");
+                    if (hexLabel) hexLabel.textContent = col;
+                    saveSettings();
+                }
+            };
+        });
+
+        const sliderSearchOp = document.getElementById("we-search-op");
+        if (sliderSearchOp) {
+            sliderSearchOp.oninput = (e) => {
+                settings.searchBgOpacity = parseInt(e.target.value) / 100;
+                document.getElementById("we-search-op-val").textContent = e.target.value + "%";
+                saveSettings();
+            };
+        }
+
+        const sliderBr = document.getElementById("we-br");
+        sliderBr.oninput = (e) => {
+            settings.brightness = parseInt(e.target.value);
+            document.getElementById("we-br-val").textContent = e.target.value + "%";
+            saveSettings();
+        };
+
+        syncFromWallpaperEngine(false);
+    }

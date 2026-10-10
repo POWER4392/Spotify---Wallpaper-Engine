@@ -1,0 +1,24 @@
+{
+  "name": "Wallpaper Engine for Spotify",
+  "description": "Display your active Wallpaper Engine wallpaper (video, animated, image) inside Spotify with glassmorphism transparency, dynamic color sync from album art, and smart scroll handling.",
+  "preview": "preview.png",
+  "main": "dist/wallpaper-engine.js",
+  "readme": "README.md",
+  "authors": [
+    {
+      "name": "POWER4392",
+      "url": "https://github.com/POWER4392"
+    }
+  ],
+  "tags": [
+    "wallpaper",
+    "background",
+    "video",
+    "live-wallpaper",
+    "glassmorphism",
+    "transparency",
+    "color-sync",
+    "wallpaper-engine",
+    "animated"
+  ]
+}

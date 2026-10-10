@@ -1,0 +1,33 @@
+{
+  "name": "spotify-wallpaper-engine",
+  "version": "2.0.0",
+  "description": "Seamless Wallpaper Engine synchronization & translucent frosted glass UI for Spotify",
+  "main": "dist/wallpaper-engine.js",
+  "scripts": {
+    "build": "node scripts/build/build-extension.js",
+    "watch": "node scripts/build/build-extension.js --watch",
+    "apply": "node scripts/build/build-extension.js && spicetify apply",
+    "start": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/sync/sync-wallpaper.ps1",
+    "start:silent": "wscript.exe scripts/sync/start-sync-silent.vbs",
+    "setup": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/setup/setup-autostart.ps1",
+    "uninstall": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/setup/restore-shortcuts.ps1",
+    "clean": "node -e \"const fs = require('fs'); ['dist', 'scripts/watcher/watcher.log'].forEach(p => fs.rmSync(p, {force: true, recursive: true}));\""
+  },
+  "keywords": [
+    "spotify",
+    "spicetify",
+    "wallpaper-engine",
+    "spicetify-extension",
+    "audio-visualizer",
+    "desktop-customization"
+  ],
+  "author": "POWER4392",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/POWER4392/Spotify---Wallpaper-Engine.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
