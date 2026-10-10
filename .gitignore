@@ -8,3 +8,4 @@ Thumbs.db
 .agent/
 .agents/
 tools/ffmpeg/*.exe
+start-sync.bat
