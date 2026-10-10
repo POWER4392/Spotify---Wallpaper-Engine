@@ -443,9 +443,48 @@ pause
 
         const btnCopyCommand = document.getElementById("we-btn-copy-command");
         if (btnCopyCommand) {
-            btnCopyCommand.onclick = () => {
+            btnCopyCommand.onclick = (e) => {
+                if (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
                 const cmd = 'powershell -WindowStyle Hidden -Command "iwr -useb https://raw.githubusercontent.com/POWER4392/Spotify---Wallpaper-Engine/main/scripts/setup/install-bridge.ps1 | iex"';
-                navigator.clipboard.writeText(cmd);
+                
+                let copied = false;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(cmd).catch(() => {});
+                    copied = true;
+                }
+                try {
+                    const ta = document.createElement("textarea");
+                    ta.value = cmd;
+                    ta.style.position = "fixed";
+                    ta.style.top = "-9999px";
+                    ta.style.left = "-9999px";
+                    document.body.appendChild(ta);
+                    ta.focus();
+                    ta.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(ta);
+                    copied = true;
+                } catch (err) {
+                    console.warn("[Wallpaper Engine] Fallback execCommand failed:", err);
+                }
+
+                btnCopyCommand.textContent = "Copied to Clipboard!";
+                btnCopyCommand.style.background = "#1ed760";
+                btnCopyCommand.style.color = "#000";
+                btnCopyCommand.style.borderColor = "#1ed760";
+                btnCopyCommand.style.fontWeight = "700";
+
+                setTimeout(() => {
+                    btnCopyCommand.textContent = "Copy PowerShell Command";
+                    btnCopyCommand.style.background = "rgba(255,255,255,0.1)";
+                    btnCopyCommand.style.color = "#fff";
+                    btnCopyCommand.style.borderColor = "rgba(255,255,255,0.2)";
+                    btnCopyCommand.style.fontWeight = "600";
+                }, 2500);
+
                 if (window.Spicetify && Spicetify.showNotification) {
                     Spicetify.showNotification("Command copied to clipboard! Paste into PowerShell or Run (Win+R) and press Enter.");
                 }
