@@ -4,6 +4,7 @@
   "preview": "preview.png",
   "main": "dist/wallpaper-engine.js",
   "readme": "README.md",
+  "branch": "main",
   "authors": [
     {
       "name": "POWER4392",
