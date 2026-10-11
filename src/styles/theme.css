@@ -119,6 +119,20 @@
                 transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease !important;
             }
 
+            /* Hide Marketplace icon in topbar */
+            #global-nav-bar button[aria-label="Marketplace"],
+            #global-nav-bar button[aria-label="marketplace"],
+            #global-nav-bar [aria-label*="Marketplace"],
+            #global-nav-bar [aria-label*="marketplace"],
+            .Root__globalNav button[aria-label="Marketplace"],
+            .Root__globalNav button[aria-label="marketplace"],
+            .Root__globalNav [aria-label*="Marketplace"],
+            .Root__globalNav [aria-label*="marketplace"],
+            #global-nav-bar .custom-navlink,
+            .Root__globalNav .custom-navlink {
+                display: none !important;
+            }
+
             #we-topbar-controls-group {
                 display: inline-flex !important;
                 align-items: center !important;
