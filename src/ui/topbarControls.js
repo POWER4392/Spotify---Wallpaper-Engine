@@ -118,13 +118,6 @@ export function setupTopBarControls() {
         } else if (srcBtn.parentElement !== controlsGroup) {
             controlsGroup.appendChild(srcBtn);
         }
-
-        const topbarMarketplace = document.querySelectorAll(
-            '.custom-navlinks-scrollable_container, #global-nav-bar .custom-navlink, .Root__globalNav .custom-navlink, #global-nav-bar [aria-label*="Marketplace"], .main-globalNav-historyButtons ~ .custom-navlinks-scrollable_container'
-        );
-        topbarMarketplace.forEach((el) => {
-            if (el.style.display !== "none") el.style.setProperty("display", "none", "important");
-        });
     }, 800);
 
     window.addEventListener("we-pause-changed", () => {

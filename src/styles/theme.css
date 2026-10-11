@@ -119,32 +119,6 @@
                 transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease !important;
             }
 
-            #global-nav-bar .custom-navlinks-scrollable_container,
-            [aria-label="global-nav-bar"] .custom-navlinks-scrollable_container,
-            .Root__globalNav .custom-navlinks-scrollable_container,
-            .main-globalNav-historyButtons ~ .custom-navlinks-scrollable_container,
-            #global-nav-bar [aria-label*="Marketplace"],
-            .Root__globalNav [aria-label*="Marketplace"],
-            #global-nav-bar [title*="Marketplace"],
-            .Root__globalNav [title*="Marketplace"],
-            #global-nav-bar a[href="/marketplace"],
-            .Root__globalNav a[href="/marketplace"],
-            #global-nav-bar .custom-navlink,
-            .Root__globalNav .custom-navlink,
-            .main-globalNav-historyButtons .custom-navlink,
-            .main-globalNav-historyButtons ~ .custom-navlink,
-            .spicetify-topbar-button:has([aria-label*="Marketplace"]),
-            .spicetify-topbar-button:has([title*="Marketplace"]) {
-                display: none !important;
-                width: 0 !important;
-                height: 0 !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                opacity: 0 !important;
-                pointer-events: none !important;
-                visibility: hidden !important;
-            }
-
             #we-topbar-controls-group {
                 display: inline-flex !important;
                 align-items: center !important;
