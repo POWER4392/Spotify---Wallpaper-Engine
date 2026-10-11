@@ -9,3 +9,5 @@ Thumbs.db
 .agents/
 tools/ffmpeg/*.exe
 start-sync.bat
+__pycache__/
+*.pyc

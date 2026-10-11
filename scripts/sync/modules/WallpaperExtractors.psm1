@@ -114,13 +114,16 @@ function Extract-SceneWallpaper {
     $compScript = Join-Path $projectRoot "tools\compositor\compose_scene.py"
     if (Test-Path $compScript) {
         try {
+            $pyCmd = (Get-Command 'py', 'python' -ErrorAction SilentlyContinue | Where-Object { $_.Source -notmatch 'WindowsApps' } | Select-Object -First 1).Source
+            if (-not $pyCmd) { $pyCmd = "python" }
+
             $pinfo = New-Object System.Diagnostics.ProcessStartInfo
-            $pinfo.FileName = "python"
+            $pinfo.FileName = $pyCmd
             $pinfo.Arguments = "`"$compScript`" `"$cacheDir`""
             $pinfo.UseShellExecute = $false
             $pinfo.CreateNoWindow = $true
             $proc = [System.Diagnostics.Process]::Start($pinfo)
-            $proc.WaitForExit(20000) | Out-Null
+            $proc.WaitForExit(30000) | Out-Null
             if ((Test-Path $resolvedJpg) -and ((Get-Item $resolvedJpg).Length -gt 10000)) {
                 Write-Host " [Compositor] Ready complete background: $workshopId" -ForegroundColor Green
                 return $resolvedJpg
