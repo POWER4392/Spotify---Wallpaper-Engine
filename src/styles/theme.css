@@ -369,9 +369,6 @@
                 border-radius: 6px !important;
             }
 
-            .encore-inverted-light-set,
-            .encore-dark-theme .encore-inverted-light-set,
-            .encore-light-theme .encore-inverted-light-set,
             [data-encore-id="chip"][aria-selected="true"],
             [data-encore-id="chip"][aria-checked="true"],
             [data-encore-id="chip"].encore-inverted-light-set,
@@ -392,9 +389,6 @@
                 color: #000000 !important;
             }
 
-            .encore-inverted-light-set *,
-            .encore-dark-theme .encore-inverted-light-set *,
-            .encore-light-theme .encore-inverted-light-set *,
             [data-encore-id="chip"][aria-selected="true"] *,
             [data-encore-id="chip"][aria-checked="true"] *,
             [data-encore-id="chip"].encore-inverted-light-set *,
@@ -409,6 +403,45 @@
                 color: #000000 !important;
                 opacity: 1 !important;
                 visibility: visible !important;
+            }
+
+            /* Crisp text in Right Sidebar (Now Playing View) */
+            .Root__right-sidebar,
+            aside.main-buddyFeed-container,
+            [data-testid="now-playing-widget"] {
+                --text-base: #ffffff !important;
+                --text-subdued: #b3b3b3 !important;
+            }
+
+            .Root__right-sidebar *,
+            aside.main-buddyFeed-container * {
+                -webkit-mask-image: none !important;
+                mask-image: none !important;
+            }
+
+            .Root__right-sidebar a:not([class*="chip"]),
+            .Root__right-sidebar h1,
+            .Root__right-sidebar h2,
+            .Root__right-sidebar h3,
+            .Root__right-sidebar [data-testid="nowplaying-track-link"],
+            .Root__right-sidebar [data-testid="context-item-info-title"] a,
+            .Root__right-sidebar [data-testid="context-item-info-title"] span,
+            aside.main-buddyFeed-container [data-testid="context-item-info-title"] a {
+                color: #ffffff !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7) !important;
+            }
+
+            .Root__right-sidebar [data-testid="context-item-info-artist"] a,
+            .Root__right-sidebar [data-testid="context-item-info-artist"] span,
+            .Root__right-sidebar [data-encore-id="type"]:not(h1):not(h2):not(h3),
+            .Root__right-sidebar p,
+            aside.main-buddyFeed-container [data-testid="context-item-info-artist"] a {
+                color: #d1d1d1 !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
             }
 
             .OsDLl_EbSaDJzGA6kqjL .GtL6v5f4OhSsTWIFTm5j,
