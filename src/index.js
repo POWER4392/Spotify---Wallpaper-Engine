@@ -2,6 +2,7 @@ import { loadSettings, settings } from './modules/settings.js';
 import { setupContainer, startAutoSyncWatcher, syncFromWallpaperEngine, loadAndApplyCustomMedia } from './modules/mediaRenderer.js';
 import { setupUI } from './ui/topbarControls.js';
 import { setupScrollWatcher } from './modules/scrollWatcher.js';
+import { setupMarketplaceQuickTabs } from './ui/marketplaceQuickTabs.js';
 
 export function injectStyles(cssContent) {
     if (document.getElementById("we-styles")) return;
@@ -25,6 +26,7 @@ export function initExtension(cssContent) {
         setupContainer();
         setupUI();
         setupScrollWatcher();
+        setupMarketplaceQuickTabs();
         startAutoSyncWatcher();
         if (settings.wallpaperSource === "wallpaper-engine") {
             setTimeout(() => syncFromWallpaperEngine(false), 800);

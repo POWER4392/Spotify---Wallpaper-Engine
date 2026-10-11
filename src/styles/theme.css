@@ -1064,3 +1064,94 @@
                 gap: 8px;
             }
             .we-btn-sync:hover { background: #1fdf64; }
+
+            /* ==========================================================================
+               Spicetify Marketplace Quick Tab Switcher (Themes, Extens., Snippets, Apps, Installed)
+               ========================================================================== */
+            .marketplace-header .marketplace-tabBar,
+            .marketplace-header .marketplace-tabBar-nav,
+            .marketplace-header #marketplace-quick-tabs-container {
+                -webkit-app-region: no-drag !important;
+                pointer-events: auto !important;
+                width: auto !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 14px !important;
+                flex: 1 1 auto !important;
+                z-index: 10 !important;
+            }
+
+            .marketplace-header .marketplace-tabBar-header,
+            .marketplace-header .marketplace-quick-tabs-list {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                list-style: none !important;
+                margin: 0 !important;
+                padding: 4px 6px !important;
+                background: rgba(255, 255, 255, 0.07) !important;
+                border: 1px solid rgba(255, 255, 255, 0.12) !important;
+                border-radius: 500px !important;
+                gap: 5px !important;
+                backdrop-filter: blur(16px) !important;
+                -webkit-backdrop-filter: blur(16px) !important;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+            }
+
+            .marketplace-header .marketplace-tabBar-headerItem,
+            .marketplace-header .marketplace-quick-tab-item {
+                -webkit-app-region: no-drag !important;
+                display: flex !important;
+                align-items: center !important;
+                pointer-events: auto !important;
+            }
+
+            .marketplace-header .marketplace-tabBar-headerItemLink,
+            .marketplace-header .marketplace-quick-tab-btn {
+                border-radius: 500px !important;
+                color: #b3b3b3 !important;
+                padding: 6px 16px !important;
+                margin: 0 !important;
+                font-weight: 700 !important;
+                font-size: 13px !important;
+                letter-spacing: 0.2px !important;
+                transition: all 0.2s cubic-bezier(0.2, 0, 0, 1) !important;
+                text-decoration: none !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                background: transparent !important;
+                border: none !important;
+                cursor: pointer !important;
+                user-select: none !important;
+                white-space: nowrap !important;
+                font-family: inherit !important;
+            }
+
+            .marketplace-header .marketplace-tabBar-headerItemLink:hover,
+            .marketplace-header .marketplace-quick-tab-btn:hover {
+                color: #ffffff !important;
+                background: rgba(255, 255, 255, 0.12) !important;
+                transform: translateY(-1px) !important;
+            }
+
+            .marketplace-header .marketplace-tabBar-active,
+            .marketplace-header .marketplace-quick-tab-btn.active {
+                background: #1ed760 !important;
+                color: #000000 !important;
+                box-shadow: 0 2px 12px rgba(30, 215, 96, 0.4) !important;
+            }
+
+            .marketplace-header .marketplace-tabBar-active:hover,
+            .marketplace-header .marketplace-quick-tab-btn.active:hover {
+                background: #1fdf64 !important;
+                color: #000000 !important;
+            }
+
+            .marketplace-header .marketplace-tabBar-active span,
+            .marketplace-header .marketplace-quick-tab-btn.active span {
+                color: #000000 !important;
+                font-weight: 800 !important;
+            }
+
