@@ -308,7 +308,11 @@ Submit structured feedback or bug reports with a single click using our official
 | :--- | :---: | :--- |
 | 💡 **Feedback & Suggestions** | [![Submit Feedback](https://img.shields.io/badge/Submit_Feedback-1ed760?style=for-the-badge&logo=github&logoColor=black)](https://github.com/POWER4392/Spotify---Wallpaper-Engine/issues/new?template=feedback.yml) | Propose new features, design enhancements, or general UX suggestions. |
 | 🐛 **Bug Report** | [![Report Bug](https://img.shields.io/badge/Report_Bug-f87171?style=for-the-badge&logo=github&logoColor=white)](https://github.com/POWER4392/Spotify---Wallpaper-Engine/issues/new?template=bug_report.yml) | Report issues such as video playback errors, wallpaper sync discrepancies, or UI glitching. |
-| 💬 **Community Discussions** | [![Join Discussions](https://img.shields.io/badge/Discussions-60a5fa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/POWER4392/Spotify---Wallpaper-Engine/discussions) | Ask questions, share configuration setups, and connect with other users. |
+| 💬 **Browse All Issues & Questions** | [![View Issues](https://img.shields.io/badge/View_Issues-60a5fa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/POWER4392/Spotify---Wallpaper-Engine/issues) | Browse existing issues, ask questions, or view resolved topics. |
+
+> [!TIP]
+> If you want to enable a dedicated **Discussions** forum tab: In your repository on GitHub, go to **Settings** -> Scroll down to **Features** -> Check **Discussions**.
+
 
 ---
 
