@@ -230,7 +230,10 @@ export function openModal() {
                     <input type="range"class="we-slider"id="we-br"min="20"max="150"value="${settings.brightness}">
                 </div>
 
-                <div style="display:flex; justify-content:flex-end; margin-top:8px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.08);">
+                    <a href="https://github.com/POWER4392/Spotify---Wallpaper-Engine/issues/new/choose"target="_blank"rel="noopener noreferrer"style="font-size:12px; color:#1ed760; text-decoration:none; display:flex; align-items:center; gap:6px; font-weight:600; transition:opacity 0.2s ease;">
+                        💬 Góp ý & Báo lỗi (Feedback)
+                    </a>
                     <button id="we-ok"style="background:#1ed760; color:#000; border:none; padding:8px 24px; border-radius:20px; font-weight:700; cursor:pointer;">Close</button>
                 </div>
             </div>
