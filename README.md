@@ -1,4 +1,4 @@
-# Wallpaper Engine for Spotify
+# ​Spotify-Wallpaper-Engine-Background
 
 [![Spicetify](https://img.shields.io/badge/Spicetify-Extension-1ed760?style=for-the-badge&logo=spotify&logoColor=white)](https://spicetify.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
