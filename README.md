@@ -296,52 +296,52 @@ Yes. The launcher and autostart scripts automatically check for both standard st
 
 ---
 
-## 💬 Feedback & Bug Report (Góp Ý & Báo Lỗi)
+## 💬 Feedback & Bug Reports
 
-Chúng tôi luôn hoan nghênh và trân trọng mọi ý kiến đóng góp, đề xuất tính năng mới cũng như báo cáo sự cố từ bạn để **Spotify Wallpaper Engine** ngày càng hoàn thiện, ổn định và mượt mà hơn!
+We welcome and appreciate all community feedback, feature suggestions, and bug reports to make **Wallpaper Engine for Spotify** faster, more versatile, and visually stunning!
 
-### 🚀 Gửi Form Trực Tuyến Nhanh (1-Click)
+### 🚀 Online Issue Forms (Recommended)
 
-Bạn có thể gửi phản hồi trực tiếp qua hệ thống GitHub Issue Form với giao diện nhập liệu trực quan:
+Submit structured feedback or bug reports with a single click using our official GitHub Issue forms:
 
-| Biểu mẫu (Form) | Nút gửi nhanh | Mục đích sử dụng |
+| Form | Direct Button | Description |
 | :--- | :---: | :--- |
-| 💡 **Form Góp Ý & Đề Xuất (Feedback)** | [![Submit Feedback](https://img.shields.io/badge/Gửi_Góp_Ý-1ed760?style=for-the-badge&logo=github&logoColor=black)](https://github.com/POWER4392/Spotify---Wallpaper-Engine/issues/new?template=feedback.yml) | Đề xuất ý tưởng, tính năng mới hoặc góp ý cải tiến giao diện/trải nghiệm người dùng. |
-| 🐛 **Form Báo Cáo Lỗi (Bug Report)** | [![Report Bug](https://img.shields.io/badge/Báo_Cáo_Lỗi-f87171?style=for-the-badge&logo=github&logoColor=white)](https://github.com/POWER4392/Spotify---Wallpaper-Engine/issues/new?template=bug_report.yml) | Báo cáo các sự cố như lỗi không hiển thị hình nền, lỗi giải mã video WebM, lệch tỉ lệ màn hình... |
-| 💬 **Thảo Luận Cộng Đồng (Discussions)** | [![Join Discussions](https://img.shields.io/badge/Thảo_Luận-60a5fa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/POWER4392/Spotify---Wallpaper-Engine/discussions) | Trao đổi kinh nghiệm sử dụng, chia sẻ mẹo tùy biến và hình nền đẹp cùng cộng đồng. |
+| 💡 **Feedback & Suggestions** | [![Submit Feedback](https://img.shields.io/badge/Submit_Feedback-1ed760?style=for-the-badge&logo=github&logoColor=black)](https://github.com/POWER4392/Spotify---Wallpaper-Engine/issues/new?template=feedback.yml) | Propose new features, design enhancements, or general UX suggestions. |
+| 🐛 **Bug Report** | [![Report Bug](https://img.shields.io/badge/Report_Bug-f87171?style=for-the-badge&logo=github&logoColor=white)](https://github.com/POWER4392/Spotify---Wallpaper-Engine/issues/new?template=bug_report.yml) | Report issues such as video playback errors, wallpaper sync discrepancies, or UI glitching. |
+| 💬 **Community Discussions** | [![Join Discussions](https://img.shields.io/badge/Discussions-60a5fa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/POWER4392/Spotify---Wallpaper-Engine/discussions) | Ask questions, share configuration setups, and connect with other users. |
 
 ---
 
-### 📝 Khung Biểu Mẫu Điền Nhanh (Copy & Paste Template)
+### 📝 Quick Issue Template (Copy & Paste)
 
-Nếu bạn muốn tạo Issue thủ công hoặc gửi phản hồi nhanh, vui lòng sao chép mẫu dưới đây và dán vào [Tạo Issue Mới](https://github.com/POWER4392/Spotify---Wallpaper-Engine/issues/new):
+If you prefer to submit a manual issue, feel free to copy the template below and paste it into [New Issue](https://github.com/POWER4392/Spotify---Wallpaper-Engine/issues/new):
 
 ```markdown
-### 📌 Tiêu đề: [Góp ý / Báo lỗi] - Tóm tắt ngắn gọn vấn đề
+### 📌 Title: [Feedback / Bug] - Brief summary of the topic
 
-#### 1. Loại phản hồi:
-- [ ] Góp ý tính năng mới (Feature Request)
-- [ ] Cải tiến giao diện / Trải nghiệm (UI/UX)
-- [ ] Báo cáo lỗi (Bug Report)
-- [ ] Tương thích hình nền (Wallpaper Engine / WebM Video)
+#### 1. Category:
+- [ ] Feature Request / Improvement
+- [ ] UI / UX Polish
+- [ ] Bug Report
+- [ ] Media Compatibility (Wallpaper Engine / WebM Video)
 
-#### 2. Mô tả chi tiết:
-<!-- Mô tả rõ ràng ý tưởng đề xuất hoặc sự cố bạn gặp phải -->
+#### 2. Detailed Description:
+<!-- Clearly describe your proposal or the issue encountered -->
 
-#### 3. Các bước tái hiện sự cố (nếu là báo lỗi):
-1. Mở Spotify và extension Wallpaper Engine
-2. Thực hiện thao tác...
-3. Lỗi xuất hiện: ...
+#### 3. Steps to Reproduce (if reporting a bug):
+1. Open Spotify with the Wallpaper Engine extension enabled
+2. Perform action...
+3. Observed behavior: ...
 
-#### 4. Thông tin môi trường:
-- Hệ điều hành: Windows 10 / 11 (64-bit)
-- Độ phân giải màn hình & Tỉ lệ: 1920x1080 (16:9) / 2560x1600 (16:10) / Khác: ...
-- Phiên bản Spotify: ...
-- Phiên bản Spicetify: ...
-- Nguồn hình nền đang dùng: Wallpaper Engine / Custom Video (.webm)
+#### 4. Environment & Specs:
+- OS: Windows 10 / 11 (64-bit)
+- Screen Resolution & Aspect Ratio: 1920x1080 (16:9) / 2560x1600 (16:10) / Other: ...
+- Spotify Version: ...
+- Spicetify Version: ...
+- Active Wallpaper Source: Wallpaper Engine / Custom Video (.webm)
 
-#### 5. Ảnh chụp màn hình / Video minh họa:
-<!-- Kéo thả hoặc dán ảnh (Ctrl + V) vào đây để chúng tôi hỗ trợ xử lý nhanh nhất -->
+#### 5. Screenshots / Media:
+<!-- Drag and drop or paste (Ctrl + V) screenshots here -->
 ```
 
 ---

@@ -1,0 +1,51 @@
+name: "💡 Feedback & Feature Suggestions"
+description: "Propose new features or UX enhancements for Wallpaper Engine for Spotify"
+title: "[Feedback]: "
+labels: ["feedback", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Thank you for sharing your feedback!
+        Your suggestions help make Wallpaper Engine for Spotify smoother, faster, and more feature-rich.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Feedback Category"
+      description: "Select the area your suggestion relates to"
+      options:
+        - "User Interface & Experience (UI / UX / Marketplace Header / Tabs)"
+        - "New Feature Request"
+        - "Performance & Resource Optimization (GPU / CPU / Memory)"
+        - "Media & Wallpaper Compatibility (Wallpaper Engine / WebM Video)"
+        - "Video Conversion Utility (convert-to-webm.bat / FFmpeg)"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: feedback_content
+    attributes:
+      label: "Detailed Feedback / Proposal"
+      description: "Clearly describe your idea, feature request, or suggested improvement."
+      placeholder: "e.g., Add an option to auto-match topbar tint color with album colors, add hotkeys..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: visual_mockup
+    attributes:
+      label: "Visual Mockup / Screenshots (Optional)"
+      description: "You can drag & drop or paste (Ctrl + V) images directly here."
+      placeholder: "Paste screenshot or image link here..."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Confirmation"
+      options:
+        - label: "I have verified that this is constructive feedback or a realistic feature suggestion."
+          required: true
