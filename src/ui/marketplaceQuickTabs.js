@@ -1,5 +1,5 @@
 const MARKETPLACE_TABS = [
-    { id: "Extensions", label: "Extens." },
+    { id: "Extensions", label: "Extensions" },
     { id: "Themes", label: "Themes" },
     { id: "Snippets", label: "Snippets" },
     { id: "Apps", label: "Apps" },
@@ -40,8 +40,26 @@ export function setupMarketplaceQuickTabs() {
         const header = document.querySelector(".marketplace-header");
         if (!header) return;
 
+        const strandedTabBar = document.querySelector(".marketplace-tabBar");
+        if (strandedTabBar && !header.contains(strandedTabBar)) {
+            const rightSide = header.querySelector(".marketplace-header__right");
+            if (rightSide) {
+                header.insertBefore(strandedTabBar, rightSide);
+            } else {
+                header.appendChild(strandedTabBar);
+            }
+            return;
+        }
+
         const nativeTabBar = header.querySelector(".marketplace-tabBar");
-        if (nativeTabBar) return;
+        if (nativeTabBar) {
+            const moreDropdown = nativeTabBar.querySelector(".Dropdown-root");
+            const dataTabs = nativeTabBar.querySelectorAll(".marketplace-tabBar-headerItem[data-tab]");
+            if (moreDropdown && dataTabs.length < 2) {
+                window.dispatchEvent(new Event("resize"));
+            }
+            return;
+        }
 
         let container = header.querySelector("#marketplace-quick-tabs-container");
         if (!container) {

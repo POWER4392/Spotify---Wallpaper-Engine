@@ -1,7 +1,3 @@
-# ====================================================================
-# Spotify Wallpaper Engine - 1-Click Universal Auto-Setup
-# Sets up background bridge & registers Windows Startup Watcher
-# ====================================================================
 $ErrorActionPreference = "SilentlyContinue"
 try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}
 
@@ -11,7 +7,6 @@ Write-Host "============================================================" -Foreg
 
 $targetDir = "$env:LOCALAPPDATA\SpotifyWallpaperEngine"
 
-# 1. Kiem tra xem co thu muc source san khong
 $scriptRoot = if ($PSScriptRoot) { $PSScriptRoot } else { $PWD.Path }
 $localRepoRoot = Split-Path -Parent (Split-Path -Parent $scriptRoot)
 
@@ -48,7 +43,6 @@ if (Test-Path (Join-Path $localRepoRoot "scripts\sync\sync-wallpaper.ps1")) {
     }
 }
 
-# 2. Dang ky Windows Startup Watcher
 Write-Host "[2/2] Dang ky tu dong chay ngam cung Windows..." -ForegroundColor Yellow
 try {
     $wsh = New-Object -ComObject WScript.Shell
@@ -74,7 +68,6 @@ try {
     Write-Host "  [!] Loi tao shortcut: $($_.Exception.Message)" -ForegroundColor Yellow
 }
 
-# 3. Khoi dong Bridge ngay lap tuc
 Write-Host "Dang khoi dong Bridge ket noi..." -ForegroundColor Cyan
 $syncVbs = Join-Path $targetDir "scripts\sync\start-sync-silent.vbs"
 if (Test-Path $syncVbs) {
