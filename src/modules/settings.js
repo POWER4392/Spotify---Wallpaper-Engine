@@ -6,6 +6,7 @@ export const BRIDGE_API = "http://127.0.0.1:43196";
 export const defaultSettings = {
     opacity: 0.35,
     sidebarOpacity: 0,
+    sidebarBlur: 0,
     playerOpacity: 0,
     headerOpacity: 0.35,
     headerBlur: 0,
@@ -25,6 +26,8 @@ export const defaultSettings = {
     mediaName: "No file selected",
     customMediaName: "",
     lastSyncFile: "",
+    homeQuickTabs: true,
+    homeQuickTabsLang: "auto",
 };
 
 export let settings = Object.assign({}, defaultSettings);
@@ -35,12 +38,15 @@ export function loadSettings() {
         if (saved) settings = Object.assign({}, defaultSettings, JSON.parse(saved));
         if (settings.wallpaperSource === undefined) settings.wallpaperSource = "wallpaper-engine";
         if (settings.sidebarOpacity === undefined) settings.sidebarOpacity = 0;
+        if (settings.sidebarBlur === undefined) settings.sidebarBlur = 0;
         if (settings.playerOpacity === undefined) settings.playerOpacity = 0;
         if (settings.topBarOpacity === undefined) settings.topBarOpacity = 0;
         if (settings.topBarBlur === undefined) settings.topBarBlur = 0;
         if (settings.wallpaperPaused === undefined) settings.wallpaperPaused = false;
         if (settings.searchBgColor === undefined) settings.searchBgColor = "#181818";
         if (settings.searchBgOpacity === undefined) settings.searchBgOpacity = 0.96;
+        if (settings.homeQuickTabs === undefined) settings.homeQuickTabs = true;
+        if (settings.homeQuickTabsLang === undefined) settings.homeQuickTabsLang = "auto";
     } catch (e) {
         console.warn("[Wallpaper Engine] Failed to read localStorage:", e);
     }
@@ -58,6 +64,7 @@ export function saveSettings() {
 export function applyVisualSettings() {
     document.documentElement.style.setProperty("--we-bg-opacity", settings.opacity);
     document.documentElement.style.setProperty("--we-sidebar-opacity", settings.sidebarOpacity !== undefined ? settings.sidebarOpacity : 0);
+    document.documentElement.style.setProperty("--we-sidebar-blur", (settings.sidebarBlur !== undefined ? settings.sidebarBlur : 0) + "px");
     document.documentElement.style.setProperty("--we-player-opacity", settings.playerOpacity !== undefined ? settings.playerOpacity : 0);
     document.documentElement.style.setProperty("--we-header-opacity", settings.headerOpacity !== undefined ? settings.headerOpacity : 0.35);
     document.documentElement.style.setProperty("--we-header-blur", (settings.headerBlur || 0) + "px");

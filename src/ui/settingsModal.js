@@ -188,6 +188,13 @@ export function openModal() {
                         <input type="range"class="we-slider"id="we-sidebar-op"min="0"max="100"value="${Math.round((settings.sidebarOpacity !== undefined ? settings.sidebarOpacity : 0) * 100)}">
                     </div>
 
+                    <div class="we-row"style="margin-bottom:8px !important;">
+                        <label><span>Sidebar Glass Blur:</span>
+                            <b id="we-sidebar-bl-val">${settings.sidebarBlur || 0}px</b>
+                        </label>
+                        <input type="range"class="we-slider"id="we-sidebar-bl"min="0"max="25"value="${settings.sidebarBlur || 0}">
+                    </div>
+
                     <div class="we-row"style="margin-bottom:0 !important;">
                         <label><span>Player Bar Background Opacity (0% = Fully Transparent):</span>
                             <b id="we-player-op-val">${Math.round((settings.playerOpacity !== undefined ? settings.playerOpacity : 0) * 100)}%</b>
@@ -228,6 +235,16 @@ export function openModal() {
                         <b id="we-br-val">${settings.brightness}%</b>
                     </label>
                     <input type="range"class="we-slider"id="we-br"min="20"max="150"value="${settings.brightness}">
+                </div>
+
+                <div style="background:rgba(30, 215, 96, 0.08); border:1px solid rgba(30, 215, 96, 0.25); border-radius:10px; padding:12px; margin-bottom:13px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <div style="font-weight:700; font-size:13px; color:#1ed760;">Recommendation Filters (All / Music / Podcasts):</div>
+                            <div style="font-size:11.5px; color:#aaa; margin-top:2px;">Tất cả, Nhạc & Podcasts cho Trang chủ / Đề xuất</div>
+                        </div>
+                        <input type="checkbox" id="we-chk-home-quick-tabs" ${settings.homeQuickTabs !== false ? "checked" : ""} style="accent-color:#1ed760; width:18px; height:18px; cursor:pointer;" />
+                    </div>
                 </div>
 
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.08);">
@@ -524,6 +541,17 @@ pause
             saveSettings();
         };
 
+        const chkHomeTabs = document.getElementById("we-chk-home-quick-tabs");
+        if (chkHomeTabs) {
+            chkHomeTabs.onchange = (e) => {
+                settings.homeQuickTabs = e.target.checked;
+                saveSettings();
+                if (window.__we_update_home_quick_tabs__) {
+                    window.__we_update_home_quick_tabs__();
+                }
+            };
+        }
+
         document.querySelectorAll("#we-fit-group .we-btn-pill").forEach((btn) => {
             btn.onclick = () => {
                 document.querySelectorAll("#we-fit-group .we-btn-pill").forEach(b =>b.classList.remove("active"));
@@ -607,6 +635,15 @@ pause
             };
         }
 
+        const sliderSidebarBl = document.getElementById("we-sidebar-bl");
+        if (sliderSidebarBl) {
+            sliderSidebarBl.oninput = (e) => {
+                settings.sidebarBlur = parseInt(e.target.value);
+                document.getElementById("we-sidebar-bl-val").textContent = e.target.value + "px";
+                saveSettings();
+            };
+        }
+
         const sliderPlayerOp = document.getElementById("we-player-op");
         if (sliderPlayerOp) {
             sliderPlayerOp.oninput = (e) => {
@@ -654,6 +691,4 @@ pause
             document.getElementById("we-br-val").textContent = e.target.value + "%";
             saveSettings();
         };
-
-        syncFromWallpaperEngine(false);
     }

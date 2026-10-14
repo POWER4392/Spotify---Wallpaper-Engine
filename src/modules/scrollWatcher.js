@@ -32,17 +32,7 @@ export function setupScrollWatcher() {
             });
         }
 
-        const shouldBeScrolled = isPastBanner;
-
-        if (shouldBeScrolled) {
-            if (!document.body.classList.contains("we-scrolled")) {
-                document.body.classList.add("we-scrolled");
-            }
-        } else {
-            if (document.body.classList.contains("we-scrolled")) {
-                document.body.classList.remove("we-scrolled");
-            }
-        }
+        document.body.classList.toggle("we-scrolled", isPastBanner);
 
         let targetTop = 64;
         const topBarEl = document.querySelector('header[data-testid="topbar"], .main-topBar-container, #global-nav-bar');
@@ -63,18 +53,8 @@ export function setupScrollWatcher() {
             }
         }
 
-        if (isTracklistStuck) {
-            if (!document.body.classList.contains("we-tracklist-stuck")) {
-                document.body.classList.add("we-tracklist-stuck");
-            }
-            if (trackHeader) trackHeader.classList.add("we-tracklist-stuck");
-        } else {
-            if (document.body.classList.contains("we-tracklist-stuck")) {
-                document.body.classList.remove("we-tracklist-stuck");
-            }
-            if (trackHeader) trackHeader.classList.remove("we-tracklist-stuck");
-        }
-
+        document.body.classList.toggle("we-tracklist-stuck", isTracklistStuck);
+        if (trackHeader) trackHeader.classList.toggle("we-tracklist-stuck", isTracklistStuck);
 
         const rightSidebar = document.querySelector(
             '.Root__right-sidebar, [grid-area="right-sidebar"], #Desktop_PanelContainer_Id, aside.main-buddyFeed-container'
@@ -105,15 +85,7 @@ export function setupScrollWatcher() {
                 });
             }
         }
-        if (isRightScrolled) {
-            if (!document.body.classList.contains("we-right-scrolled")) {
-                document.body.classList.add("we-right-scrolled");
-            }
-        } else {
-            if (document.body.classList.contains("we-right-scrolled")) {
-                document.body.classList.remove("we-right-scrolled");
-            }
-        }
+        document.body.classList.toggle("we-right-scrolled", isRightScrolled);
     };
 
     window.addEventListener('scroll', syncColorAndScroll, { capture: true, passive: true });
@@ -136,8 +108,6 @@ export function setupScrollWatcher() {
         if (window.Spicetify?.Platform?.History?.listen) {
             window.Spicetify.Platform.History.listen(() => {
                 setTimeout(syncColorAndScroll, 100);
-                setTimeout(syncColorAndScroll, 500);
-                setTimeout(syncColorAndScroll, 1200);
             });
         }
     } catch {}

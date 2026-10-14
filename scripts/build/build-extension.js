@@ -15,16 +15,26 @@ function cleanModule(filePath) {
     return content.trim();
 }
 
+function cleanCss(content) {
+    return content
+        .replace(/\/\*[\s\S]*?\*\//g, '')
+        .replace(/^\s*[\r\n]/gm, '')
+        .trim();
+}
+
 function buildBundle() {
     const cssPath = path.join(srcDir, 'styles', 'theme.css');
-    const cssContent = fs.readFileSync(cssPath, 'utf8');
+    const cssContent = cleanCss(fs.readFileSync(cssPath, 'utf8'));
 
     const settingsCode = cleanModule(path.join(srcDir, 'modules', 'settings.js'));
     const mediaRendererCode = cleanModule(path.join(srcDir, 'modules', 'mediaRenderer.js'));
     const colorSyncCode = cleanModule(path.join(srcDir, 'modules', 'colorSync.js'));
     const scrollWatcherCode = cleanModule(path.join(srcDir, 'modules', 'scrollWatcher.js'));
+    const homeFeedQuickTabsCode = cleanModule(path.join(srcDir, 'ui', 'homeFeedQuickTabs.js'));
+    const marketplaceQuickTabsCode = cleanModule(path.join(srcDir, 'ui', 'marketplaceQuickTabs.js'));
     const settingsModalCode = cleanModule(path.join(srcDir, 'ui', 'settingsModal.js'));
     const topbarControlsCode = cleanModule(path.join(srcDir, 'ui', 'topbarControls.js'));
+    const offlineHandlerCode = cleanModule(path.join(srcDir, 'modules', 'offlineHandler.js'));
     const indexCode = cleanModule(path.join(srcDir, 'index.js'));
 
     const bundle = `(function () {
@@ -38,9 +48,15 @@ function buildBundle() {
 
     ${scrollWatcherCode}
 
+    ${homeFeedQuickTabsCode}
+
+    ${marketplaceQuickTabsCode}
+
     ${topbarControlsCode}
 
     ${settingsModalCode}
+
+    ${offlineHandlerCode}
 
     ${indexCode}
 

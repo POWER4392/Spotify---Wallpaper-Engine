@@ -1,6 +1,7 @@
 :root {
                 --we-bg-opacity: var(--we-bg-opacity, 0.4);
                 --we-sidebar-opacity: var(--we-sidebar-opacity, 0);
+                --we-sidebar-blur: var(--we-sidebar-blur, 0px);
                 --we-player-opacity: var(--we-player-opacity, 0);
                 --we-header-opacity: var(--we-header-opacity, 0.35);
                 --we-header-blur: var(--we-header-blur, 0px);
@@ -147,7 +148,8 @@
             }
 
             #we-topbar-pause-btn,
-            #we-topbar-source-btn {
+            #we-topbar-source-btn,
+            #we-topbar-settings-btn {
                 display: inline-flex !important;
                 align-items: center !important;
                 justify-content: center !important;
@@ -171,12 +173,14 @@
             }
 
             #we-topbar-pause-btn *,
-            #we-topbar-source-btn * {
+            #we-topbar-source-btn *,
+            #we-topbar-settings-btn * {
                 pointer-events: none !important;
             }
 
             #we-topbar-pause-btn:hover,
-            #we-topbar-source-btn:hover {
+            #we-topbar-source-btn:hover,
+            #we-topbar-settings-btn:hover {
                 background: rgba(255, 255, 255, 0.2) !important;
                 color: #fff !important;
                 border-color: rgba(255, 255, 255, 0.3) !important;
@@ -369,6 +373,258 @@
                 border-radius: 6px !important;
             }
 
+            /* ==========================================================================
+               Modals, Dialogs & Offline Error Takeovers Fix
+               Prevents white/invisible popup when offline or disconnected
+               ========================================================================== */
+
+            /* 1. Backdrop / Modal Overlays */
+            ._NFePmYV2P6aLGrjLvuR,
+            [class*="_NFePmYV2P6aLGrjLvuR"],
+            .MI75x8lBMXNep1yyjDEm,
+            [class*="MI75x8lBMXNep1yyjDEm"],
+            .FWRsAr8oHcFEkQHOl2AX,
+            [class*="FWRsAr8oHcFEkQHOl2AX"],
+            .GenericModal__overlay,
+            [data-encore-id="dialogContainer"] {
+                background-color: rgba(0, 0, 0, 0.72) !important;
+                backdrop-filter: blur(14px) !important;
+                -webkit-backdrop-filter: blur(14px) !important;
+                z-index: 99999 !important;
+            }
+
+            /* 2. All Dialog Containers & Error Takeovers (Solid dark premium styling) */
+            .EvmeKyemPmmbdjRZQezw,
+            [class*="EvmeKyemPmmbdjRZQezw"],
+            .FnUUCAJ79nf4_lZGH0DB,
+            [class*="FnUUCAJ79nf4_lZGH0DB"],
+            .NtWOkt024WYaueIUALuA,
+            [class*="NtWOkt024WYaueIUALuA"],
+            .J3AtAGuT6X4todj9_fB3,
+            [class*="J3AtAGuT6X4todj9_fB3"],
+            .XokIsLUKMjRuJSLJmTwY,
+            [class*="XokIsLUKMjRuJSLJmTwY"],
+            .gTYd9GSAsWVjfay4zq69,
+            [class*="gTYd9GSAsWVjfay4zq69"],
+            .oR0RlcQEKv9iw0PEpE2q,
+            [class*="oR0RlcQEKv9iw0PEpE2q"],
+            .VKV9ocGl5fpJYLxCo_Eu,
+            [class*="VKV9ocGl5fpJYLxCo_Eu"],
+            .jnrWk1nCBOEUqS_eCccW,
+            [class*="jnrWk1nCBOEUqS_eCccW"],
+            .GenericModal,
+            [role="dialog"]:not(.we-dialog):not([data-testid="search-modal"]),
+            [data-encore-id="dialog"],
+            .encore-light-theme.EvmeKyemPmmbdjRZQezw,
+            .encore-light-theme.FnUUCAJ79nf4_lZGH0DB {
+                --background-base: #181818 !important;
+                --background-elevated-base: #242424 !important;
+                --text-base: #ffffff !important;
+                --text-subdued: #b3b3b3 !important;
+                --essential-base: #ffffff !important;
+                background: #181818 !important;
+                background-color: #181818 !important;
+                color: #ffffff !important;
+                border: 1px solid rgba(255, 255, 255, 0.14) !important;
+                border-radius: 14px !important;
+                box-shadow: 0 24px 60px rgba(0, 0, 0, 0.92), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+                backdrop-filter: blur(28px) !important;
+                -webkit-backdrop-filter: blur(28px) !important;
+                box-sizing: border-box !important;
+            }
+
+            /* Ensure text inside modals is always visible, high contrast and clean */
+            .EvmeKyemPmmbdjRZQezw *,
+            [class*="EvmeKyemPmmbdjRZQezw"] *,
+            .FnUUCAJ79nf4_lZGH0DB *,
+            [class*="FnUUCAJ79nf4_lZGH0DB"] * {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            .EvmeKyemPmmbdjRZQezw h1,
+            [class*="EvmeKyemPmmbdjRZQezw"] h1,
+            .FnUUCAJ79nf4_lZGH0DB h1,
+            [class*="FnUUCAJ79nf4_lZGH0DB"] h1 {
+                color: #ffffff !important;
+                font-size: 20px !important;
+                font-weight: 700 !important;
+                letter-spacing: -0.02em !important;
+                margin: 0 0 10px 0 !important;
+            }
+
+            .EvmeKyemPmmbdjRZQezw p,
+            [class*="EvmeKyemPmmbdjRZQezw"] p,
+            .FnUUCAJ79nf4_lZGH0DB p,
+            [class*="FnUUCAJ79nf4_lZGH0DB"] p {
+                color: #b3b3b3 !important;
+                font-size: 13.5px !important;
+                line-height: 1.55 !important;
+                margin: 0 0 18px 0 !important;
+            }
+
+            /* 3. Action Buttons inside modals */
+            ._fA4q2hl7XY7z6Sh5pRv,
+            [class*="_fA4q2hl7XY7z6Sh5pRv"],
+            .KubpT42JTL9IbK8ixLiC button,
+            .YBUiYN9k0MC_fAgWUau7 button,
+            .EvmeKyemPmmbdjRZQezw button,
+            .FnUUCAJ79nf4_lZGH0DB button {
+                background-color: #1ed760 !important;
+                color: #000000 !important;
+                font-weight: 700 !important;
+                font-size: 13.5px !important;
+                border-radius: 500px !important;
+                border: none !important;
+                padding: 10px 28px !important;
+                cursor: pointer !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-shadow: 0 4px 14px rgba(30, 215, 96, 0.3) !important;
+                transition: transform 0.15s ease, background-color 0.15s ease !important;
+            }
+
+            ._fA4q2hl7XY7z6Sh5pRv:hover,
+            [class*="_fA4q2hl7XY7z6Sh5pRv"]:hover,
+            .KubpT42JTL9IbK8ixLiC button:hover,
+            .YBUiYN9k0MC_fAgWUau7 button:hover,
+            .EvmeKyemPmmbdjRZQezw button:hover,
+            .FnUUCAJ79nf4_lZGH0DB button:hover {
+                background-color: #1fdf64 !important;
+                transform: scale(1.04) !important;
+            }
+
+            ._fA4q2hl7XY7z6Sh5pRv:active,
+            .KubpT42JTL9IbK8ixLiC button:active,
+            .YBUiYN9k0MC_fAgWUau7 button:active {
+                transform: scale(0.98) !important;
+            }
+
+            /* Secondary / Dismiss button in offline modal */
+            .we-offline-dismiss-btn {
+                background: rgba(255, 255, 255, 0.1) !important;
+                color: #ffffff !important;
+                border: 1px solid rgba(255, 255, 255, 0.16) !important;
+                border-radius: 500px !important;
+                padding: 10px 22px !important;
+                font-size: 13px !important;
+                font-weight: 600 !important;
+                cursor: pointer !important;
+                transition: all 0.2s ease !important;
+                margin-right: 10px !important;
+            }
+
+            .we-offline-dismiss-btn:hover {
+                background: rgba(255, 255, 255, 0.18) !important;
+                color: #ffffff !important;
+                border-color: rgba(255, 255, 255, 0.28) !important;
+                transform: scale(1.03) !important;
+            }
+
+            /* Close 'X' button in top right of modal */
+            .we-modal-corner-close {
+                position: absolute !important;
+                top: 14px !important;
+                right: 16px !important;
+                background: transparent !important;
+                border: none !important;
+                color: #888888 !important;
+                font-size: 20px !important;
+                line-height: 1 !important;
+                cursor: pointer !important;
+                padding: 4px 8px !important;
+                border-radius: 50% !important;
+                transition: color 0.15s ease, background-color 0.15s ease !important;
+                box-shadow: none !important;
+            }
+
+            .we-modal-corner-close:hover {
+                color: #ffffff !important;
+                background: rgba(255, 255, 255, 0.1) !important;
+                transform: none !important;
+            }
+
+            /* Context Menus, Create Menu & Popovers (Opaque, solid dark background) */
+            .iokCRJjXyIjWZgavMwbm,
+            [class*="iokCRJjXyIjWZgavMwbm"],
+            #context-menu,
+            [id="context-menu"],
+            [data-context-menu],
+            [data-testid="context-menu"],
+            .main-contextMenu-menu,
+            div[role="menu"],
+            ul[role="menu"],
+            nav[role="menu"],
+            [data-encore-id="popover"],
+            [data-encore-id="menu"],
+            [data-encore-id="contextMenu"],
+            [data-tippy-root] > .tippy-box,
+            .tippy-box[data-theme~="context-menu"],
+            .tippy-box[data-theme~="popover"],
+            .tippy-box[data-theme~="activation"] {
+                --background-base: #242424 !important;
+                --background-elevated-base: #242424 !important;
+                --background-elevated-highlight: rgba(255, 255, 255, 0.12) !important;
+                --background-elevated-press: rgba(255, 255, 255, 0.18) !important;
+                --spice-card: #242424 !important;
+                background-color: #242424 !important;
+                background: #242424 !important;
+                border: 1px solid rgba(255, 255, 255, 0.12) !important;
+                border-radius: 8px !important;
+                box-shadow: 0 16px 36px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+                backdrop-filter: blur(24px) !important;
+                -webkit-backdrop-filter: blur(24px) !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                z-index: 9999 !important;
+            }
+
+            .iokCRJjXyIjWZgavMwbm *,
+            [class*="iokCRJjXyIjWZgavMwbm"] *,
+            #context-menu *,
+            [id="context-menu"] *,
+            [data-context-menu] *,
+            [data-testid="context-menu"] *,
+            .main-contextMenu-menu *,
+            [role="menu"] *,
+            [data-tippy-root] > .tippy-box * {
+                -webkit-mask-image: none !important;
+                mask-image: none !important;
+            }
+
+            .iokCRJjXyIjWZgavMwbm [role="menuitem"],
+            .iokCRJjXyIjWZgavMwbm button,
+            #context-menu [role="menuitem"],
+            #context-menu button,
+            .main-contextMenu-menu [role="menuitem"],
+            [role="menu"] [role="menuitem"],
+            [role="menu"] button {
+                color: #ffffff !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            .iokCRJjXyIjWZgavMwbm [role="menuitem"]:hover,
+            .iokCRJjXyIjWZgavMwbm button:hover,
+            #context-menu [role="menuitem"]:hover,
+            #context-menu button:hover,
+            .main-contextMenu-menu [role="menuitem"]:hover,
+            [role="menu"] [role="menuitem"]:hover,
+            [role="menu"] button:hover,
+            [role="menu"] li:hover {
+                background-color: rgba(255, 255, 255, 0.1) !important;
+                border-radius: 6px !important;
+            }
+
+            .iokCRJjXyIjWZgavMwbm p,
+            .iokCRJjXyIjWZgavMwbm span:not([data-encore-id="icon"]):not(button *),
+            #context-menu p,
+            [role="menu"] p {
+                color: #b3b3b3 !important;
+                opacity: 1 !important;
+            }
+
             [data-encore-id="chip"][aria-selected="true"],
             [data-encore-id="chip"][aria-checked="true"],
             [data-encore-id="chip"].encore-inverted-light-set,
@@ -405,43 +661,295 @@
                 visibility: visible !important;
             }
 
-            /* Crisp text in Right Sidebar (Now Playing View) */
+            /* Crisp text & titles in Right Sidebar (Now Playing View) */
             .Root__right-sidebar,
+            aside#Desktop_PanelContainer_Id,
+            aside._PCtpBj8KAibsMRyofjJ,
             aside.main-buddyFeed-container,
-            [data-testid="now-playing-widget"] {
+            [grid-area="right-sidebar"],
+            [data-testid="now-playing-widget"],
+            [data-testid="now-playing-view"] {
                 --text-base: #ffffff !important;
-                --text-subdued: #b3b3b3 !important;
+                --text-subdued: #d1d1d1 !important;
+                --essential-base: #ffffff !important;
             }
 
             .Root__right-sidebar *,
-            aside.main-buddyFeed-container * {
+            aside#Desktop_PanelContainer_Id *,
+            aside._PCtpBj8KAibsMRyofjJ *,
+            aside.main-buddyFeed-container *,
+            [grid-area="right-sidebar"] *,
+            [data-testid="now-playing-view"] * {
                 -webkit-mask-image: none !important;
                 mask-image: none !important;
             }
 
-            .Root__right-sidebar a:not([class*="chip"]),
-            .Root__right-sidebar h1,
-            .Root__right-sidebar h2,
-            .Root__right-sidebar h3,
-            .Root__right-sidebar [data-testid="nowplaying-track-link"],
-            .Root__right-sidebar [data-testid="context-item-info-title"] a,
-            .Root__right-sidebar [data-testid="context-item-info-title"] span,
-            aside.main-buddyFeed-container [data-testid="context-item-info-title"] a {
+            /* Right sidebar top header title bar (Balanced, fixed, matching preview.png) */
+            aside .WU7dTdoNA51czqGivj8T,
+            [grid-area="right-sidebar"] .WU7dTdoNA51czqGivj8T {
+                position: sticky !important;
+                top: 0 !important;
+                z-index: 10 !important;
+                padding-inline: 16px !important;
+                background: transparent !important;
+            }
+
+            aside .cciGXIL4H2kwy1SlhFHO,
+            [grid-area="right-sidebar"] .cciGXIL4H2kwy1SlhFHO {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 12px !important;
+                height: 64px !important;
+                padding: 0 !important;
+                width: 100% !important;
+            }
+
+            aside .YhwuATKkQlzoZCmTVzln,
+            [grid-area="right-sidebar"] .YhwuATKkQlzoZCmTVzln {
+                transform: none !important;
+                margin-inline-start: 0 !important;
+            }
+
+            aside .VbB3qUTRgDiJahFnkGKZ,
+            [grid-area="right-sidebar"] .VbB3qUTRgDiJahFnkGKZ {
+                opacity: 1 !important;
+                visibility: visible !important;
+                flex-shrink: 0 !important;
+                color: #ffffff !important;
+            }
+
+            aside .VGs80tqm_c_ySQSKajjJ,
+            [grid-area="right-sidebar"] .VGs80tqm_c_ySQSKajjJ {
+                flex: 1 1 auto !important;
+                min-width: 0 !important;
+                overflow: hidden !important;
+            }
+
+            aside .VGs80tqm_c_ySQSKajjJ h1,
+            aside .VGs80tqm_c_ySQSKajjJ a,
+            aside .VGs80tqm_c_ySQSKajjJ span,
+            [grid-area="right-sidebar"] .VGs80tqm_c_ySQSKajjJ h1,
+            [grid-area="right-sidebar"] .VGs80tqm_c_ySQSKajjJ a,
+            [grid-area="right-sidebar"] .VGs80tqm_c_ySQSKajjJ span,
+            aside header h1,
+            aside header h2,
+            [data-testid="panel-header"] a,
+            [data-testid="panel-header"] span,
+            [data-testid="panel-header"] h1,
+            [data-testid="panel-header"] h2 {
+                color: #ffffff !important;
+                font-size: 1rem !important;
+                font-weight: 700 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                display: block !important;
+            }
+
+            aside .YCPThfr7qRs0GWRULLMO,
+            aside .FPixZ7lIQyDOBbfN7u4e,
+            [grid-area="right-sidebar"] .YCPThfr7qRs0GWRULLMO,
+            [grid-area="right-sidebar"] .FPixZ7lIQyDOBbfN7u4e {
+                display: flex !important;
+                align-items: center !important;
+                gap: 8px !important;
+                margin-left: auto !important;
+                flex-shrink: 0 !important;
+            }
+
+            aside .YCPThfr7qRs0GWRULLMO button,
+            aside .FPixZ7lIQyDOBbfN7u4e button,
+            [grid-area="right-sidebar"] .YCPThfr7qRs0GWRULLMO button,
+            [grid-area="right-sidebar"] .FPixZ7lIQyDOBbfN7u4e button {
                 color: #ffffff !important;
                 opacity: 1 !important;
                 visibility: visible !important;
-                text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7) !important;
             }
 
+            /* Right sidebar track info row (title, artists, share & like buttons) */
+            aside .f8pB2G3XUFXNNPQ_Ppxb,
+            [grid-area="right-sidebar"] .f8pB2G3XUFXNNPQ_Ppxb {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 12px !important;
+                width: 100% !important;
+                padding: 10px 16px !important;
+                min-height: 64px !important;
+                box-sizing: border-box !important;
+                position: relative !important;
+            }
+
+            aside .f8pB2G3XUFXNNPQ_Ppxb:before,
+            [grid-area="right-sidebar"] .f8pB2G3XUFXNNPQ_Ppxb:before {
+                opacity: 0.5 !important;
+            }
+
+            aside .ythX3GWFZONFG4g1e0o9,
+            [grid-area="right-sidebar"] .ythX3GWFZONFG4g1e0o9 {
+                flex: 1 1 auto !important;
+                min-width: 0 !important;
+                overflow: hidden !important;
+                display: block !important;
+            }
+
+            aside .bYH9fSPiWiXHLnKLf4cn,
+            [grid-area="right-sidebar"] .bYH9fSPiWiXHLnKLf4cn {
+                display: grid !important;
+                min-width: 0 !important;
+                width: 100% !important;
+            }
+
+            /* Track Title in Right Sidebar (Bold, White, prominent) */
+            aside .UxJZcpiOpOv5I0B1Tjdw,
+            [grid-area="right-sidebar"] .UxJZcpiOpOv5I0B1Tjdw,
+            aside [grid-area="title"],
+            [grid-area="right-sidebar"] [grid-area="title"] {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                width: 100% !important;
+                min-width: 0 !important;
+                overflow: hidden !important;
+            }
+
+            aside .UxJZcpiOpOv5I0B1Tjdw a,
+            aside .UxJZcpiOpOv5I0B1Tjdw span,
+            aside .d3zdrpIND1kwUkLadc04,
+            aside .d3zdrpIND1kwUkLadc04 a,
+            aside .d3zdrpIND1kwUkLadc04 span,
+            [grid-area="right-sidebar"] .UxJZcpiOpOv5I0B1Tjdw a,
+            [grid-area="right-sidebar"] .UxJZcpiOpOv5I0B1Tjdw span,
+            [grid-area="right-sidebar"] .d3zdrpIND1kwUkLadc04,
+            [grid-area="right-sidebar"] .d3zdrpIND1kwUkLadc04 a,
+            [grid-area="right-sidebar"] .d3zdrpIND1kwUkLadc04 span,
+            aside [data-testid*="track-name"],
+            aside [data-testid*="title"],
+            aside [data-testid="context-item-info-title"],
+            aside [data-testid="context-item-info-title"] a,
+            aside [data-testid="context-item-info-title"] span,
+            aside [data-testid="track-info-name"],
+            aside [data-testid="track-info-name"] a,
+            aside [data-testid="track-info-name"] span,
+            .Root__right-sidebar [data-testid="context-item-info-title"],
+            .Root__right-sidebar [data-testid="context-item-info-title"] a,
+            .Root__right-sidebar [data-testid="context-item-info-title"] span,
+            .Root__right-sidebar [data-testid="track-info-name"],
+            .Root__right-sidebar [data-testid="track-info-name"] a,
+            .Root__right-sidebar [data-testid="track-info-name"] span {
+                color: #ffffff !important;
+                font-size: 1.5rem !important;
+                font-weight: 700 !important;
+                line-height: 1.25 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
+            }
+
+            /* Track Artists in Right Sidebar */
+            aside .yPuQIWyOhCzYrdC7hhfw,
+            [grid-area="right-sidebar"] .yPuQIWyOhCzYrdC7hhfw,
+            aside [grid-area*="subtitle"],
+            [grid-area="right-sidebar"] [grid-area*="subtitle"] {
+                display: flex !important;
+                align-items: baseline !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                min-width: 0 !important;
+                width: 100% !important;
+                margin-top: 4px !important;
+            }
+
+            aside .yPuQIWyOhCzYrdC7hhfw a,
+            aside .yPuQIWyOhCzYrdC7hhfw span,
+            [grid-area="right-sidebar"] .yPuQIWyOhCzYrdC7hhfw a,
+            [grid-area="right-sidebar"] .yPuQIWyOhCzYrdC7hhfw span,
+            aside [data-testid*="artist"],
+            aside [data-testid="context-item-info-artist"],
+            aside [data-testid="context-item-info-artist"] a,
+            aside [data-testid="context-item-info-artist"] span,
+            aside [data-testid="track-info-artists"],
+            aside [data-testid="track-info-artists"] a,
+            aside [data-testid="track-info-artists"] span,
+            .Root__right-sidebar [data-testid="context-item-info-artist"],
             .Root__right-sidebar [data-testid="context-item-info-artist"] a,
             .Root__right-sidebar [data-testid="context-item-info-artist"] span,
-            .Root__right-sidebar [data-encore-id="type"]:not(h1):not(h2):not(h3),
-            .Root__right-sidebar p,
-            aside.main-buddyFeed-container [data-testid="context-item-info-artist"] a {
+            .Root__right-sidebar [data-testid="track-info-artists"],
+            .Root__right-sidebar [data-testid="track-info-artists"] a,
+            .Root__right-sidebar [data-testid="track-info-artists"] span {
                 color: #d1d1d1 !important;
+                font-size: 0.9375rem !important;
+                font-weight: 400 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
                 opacity: 1 !important;
                 visibility: visible !important;
                 text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
+            }
+
+            aside .yPuQIWyOhCzYrdC7hhfw a:hover,
+            [grid-area="right-sidebar"] .yPuQIWyOhCzYrdC7hhfw a:hover {
+                color: #ffffff !important;
+                text-decoration: underline !important;
+            }
+
+            /* Action buttons on the right of Track info (Share & Add to library) */
+            aside .wlaBAYQk3K1M_lNqOKNw,
+            [grid-area="right-sidebar"] .wlaBAYQk3K1M_lNqOKNw,
+            aside .da733NgUMo3KFbRwTBHD,
+            [grid-area="right-sidebar"] .da733NgUMo3KFbRwTBHD {
+                display: flex !important;
+                align-items: center !important;
+                gap: 8px !important;
+                flex-shrink: 0 !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                width: auto !important;
+            }
+
+            aside .wlaBAYQk3K1M_lNqOKNw button,
+            aside .da733NgUMo3KFbRwTBHD button,
+            [grid-area="right-sidebar"] .wlaBAYQk3K1M_lNqOKNw button,
+            [grid-area="right-sidebar"] .da733NgUMo3KFbRwTBHD button {
+                opacity: 1 !important;
+                visibility: visible !important;
+                color: #ffffff !important;
+            }
+
+            /* Solid crisp play button triangle (sharp black on Spotify green) */
+            [data-encore-id="buttonPrimary"],
+            [data-testid*="play-button"],
+            .main-playButton-PlayButton {
+                background-color: #1ed760 !important;
+                color: #000000 !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            [data-encore-id="buttonPrimary"] svg,
+            [data-testid*="play-button"] svg,
+            .main-playButton-PlayButton svg {
+                fill: #000000 !important;
+                color: #000000 !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            [data-encore-id="buttonPrimary"] svg path,
+            [data-testid*="play-button"] svg path,
+            .main-playButton-PlayButton svg path {
+                fill: #000000 !important;
+                opacity: 1 !important;
             }
 
             .OsDLl_EbSaDJzGA6kqjL .GtL6v5f4OhSsTWIFTm5j,
@@ -490,25 +998,64 @@
             .wS8WRtgpp8hCpDALPMTR,
             [class*="wS8WRtgpp8hCpDALPMTR"],
             [grid-area="left-sidebar"],
-            .Root__nav-bar,
-            .main-yourLibraryX-entryPoints,
-            .main-yourLibraryX-navItems,
-            [data-testid="your-library-x"],
-            .main-yourLibraryX-libraryRoot,
-            .main-yourLibraryX-libraryContainer,
-            .main-yourLibraryX-library,
-            .main-yourLibraryX-scrollNode,
-            .main-yourLibraryX-isCollapsed,
-            [class*="yourLibraryX"],
-            .Root__nav-bar nav,
-            .main-yourLibraryX-header,
-            aside.main-buddyFeed-container,
-            .Root__right-sidebar {
+            .Root__nav-bar {
                 --background-base: rgba(18, 18, 18, var(--we-sidebar-opacity, 0)) !important;
                 background-color: rgba(18, 18, 18, var(--we-sidebar-opacity, 0)) !important;
                 background: rgba(18, 18, 18, var(--we-sidebar-opacity, 0)) !important;
                 background-image: none !important;
                 border-radius: 8px !important;
+                backdrop-filter: blur(var(--we-sidebar-blur, 0px)) !important;
+                -webkit-backdrop-filter: blur(var(--we-sidebar-blur, 0px)) !important;
+            }
+
+            /* Inner children of Left Sidebar transparent so opacity doesn't compound */
+            #Desktop_LeftSidebar_Id nav,
+            #Desktop_LeftSidebar_Id [data-testid="your-library-x"],
+            #Desktop_LeftSidebar_Id .main-yourLibraryX-entryPoints,
+            #Desktop_LeftSidebar_Id .main-yourLibraryX-navItems,
+            #Desktop_LeftSidebar_Id .main-yourLibraryX-libraryRoot,
+            #Desktop_LeftSidebar_Id .main-yourLibraryX-libraryContainer,
+            #Desktop_LeftSidebar_Id .main-yourLibraryX-library,
+            #Desktop_LeftSidebar_Id .main-yourLibraryX-scrollNode,
+            #Desktop_LeftSidebar_Id .main-yourLibraryX-header,
+            #Desktop_LeftSidebar_Id [class*="yourLibraryX"],
+            .wS8WRtgpp8hCpDALPMTR > div,
+            [grid-area="left-sidebar"] nav,
+            [grid-area="left-sidebar"] [data-testid="your-library-x"],
+            [grid-area="left-sidebar"] .main-yourLibraryX-libraryContainer,
+            [grid-area="left-sidebar"] .main-yourLibraryX-library,
+            [grid-area="left-sidebar"] .main-yourLibraryX-scrollNode,
+            [grid-area="left-sidebar"] .main-yourLibraryX-header {
+                background: transparent !important;
+                background-color: transparent !important;
+                background-image: none !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+
+            /* Right Sidebar Root Container */
+            aside.main-buddyFeed-container,
+            aside#Desktop_PanelContainer_Id,
+            aside._PCtpBj8KAibsMRyofjJ,
+            [grid-area="right-sidebar"],
+            .Root__right-sidebar {
+                --background-base: rgba(18, 18, 18, var(--we-sidebar-opacity, 0.75)) !important;
+                background-color: rgba(18, 18, 18, var(--we-sidebar-opacity, 0.75)) !important;
+                background: rgba(18, 18, 18, var(--we-sidebar-opacity, 0.75)) !important;
+                background-image: none !important;
+                border-radius: 8px !important;
+                backdrop-filter: blur(var(--we-sidebar-blur, 15px)) !important;
+                -webkit-backdrop-filter: blur(var(--we-sidebar-blur, 15px)) !important;
+            }
+
+            aside#Desktop_PanelContainer_Id > div,
+            [grid-area="right-sidebar"] .HEks3dIohQeqX5OWB2hO,
+            [grid-area="right-sidebar"] .z5LlcLjY7QXNKAKlui7E,
+            [grid-area="right-sidebar"] .tupiSNNoKG_TT60g3TFL {
+                background: transparent !important;
+                background-color: transparent !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
             }
 
             #Desktop_LeftSidebar_Id *,
@@ -837,17 +1384,23 @@
                 border-bottom: none !important;
             }
 
-            body:not(.we-scrolled) .main-topBar-topbarContent > *,
-            body:not(.we-scrolled) [data-testid="topbar-content"] > *,
-            body:not(.we-scrolled) .main-topBar-title,
-            body:not(.we-scrolled) .main-topBar-topbarContent,
-            body:not(.we-scrolled) .Q1NfqgV_yRJmogHJOsmI > *,
-            body:not(.we-scrolled) [class*="Q1NfqgV_yRJmogHJOsmI"] > * {
-                opacity: 0 !important;
-                visibility: hidden !important;
-                pointer-events: none !important;
+            /* Filter chips & Topbar content: always visible */
+            .main-home-filterChipsContainer,
+            [data-encore-id="chipList"],
+            [data-encore-id="chip"],
+            .main-topBar-topbarContent,
+            [data-testid="topbar-content"] {
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+            }
+
+            body:not(.we-scrolled) .main-topBar-title {
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
                 transform: translateY(6px);
-                transition: opacity 0.2s ease, transform 0.2s ease !important;
+                transition: opacity 0.2s ease, transform 0.2s ease;
             }
 
             body.we-scrolled header[data-testid="topbar"],
@@ -1174,4 +1727,113 @@
                 color: #000000 !important;
                 font-weight: 800 !important;
             }
+
+            /* ==========================================================================
+               Home Feed Recommendation Quick Tabs (All, Music, Podcasts)
+               ========================================================================== */
+            #we-home-quick-tabs {
+                position: sticky !important;
+                top: var(--we-tracklist-top, 64px) !important;
+                z-index: 25 !important;
+                padding: 12px var(--content-spacing, 32px) 8px var(--content-spacing, 32px) !important;
+                display: flex !important;
+                align-items: center !important;
+                background: transparent !important;
+                pointer-events: none !important;
+                box-sizing: border-box !important;
+                transition: padding 0.2s ease !important;
+            }
+
+            @media (max-width: 768px) {
+                #we-home-quick-tabs {
+                    padding: 8px 16px !important;
+                }
+            }
+
+            .we-home-quick-tabs-list {
+                display: inline-flex !important;
+                align-items: center !important;
+                list-style: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                gap: 8px !important;
+                pointer-events: auto !important;
+            }
+
+            .we-home-quick-tab-item {
+                display: inline-flex !important;
+                align-items: center !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                list-style: none !important;
+            }
+
+            .we-home-quick-tab-btn {
+                appearance: none !important;
+                -webkit-appearance: none !important;
+                outline: none !important;
+                border: 1px solid rgba(255, 255, 255, 0.14) !important;
+                background: rgba(255, 255, 255, 0.08) !important;
+                color: #ffffff !important;
+                border-radius: 500px !important;
+                padding: 7px 18px !important;
+                font-size: 13.5px !important;
+                font-weight: 600 !important;
+                letter-spacing: 0.1px !important;
+                cursor: pointer !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                backdrop-filter: blur(20px) !important;
+                -webkit-backdrop-filter: blur(20px) !important;
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+                transition: all 0.2s cubic-bezier(0.2, 0, 0, 1) !important;
+                user-select: none !important;
+                white-space: nowrap !important;
+                font-family: inherit !important;
+            }
+
+            .we-home-quick-tab-btn:hover {
+                background: rgba(255, 255, 255, 0.18) !important;
+                border-color: rgba(255, 255, 255, 0.28) !important;
+                color: #ffffff !important;
+                transform: translateY(-1px) scale(1.02) !important;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4) !important;
+            }
+
+            .we-home-quick-tab-btn:active {
+                transform: scale(0.97) !important;
+            }
+
+            .we-home-quick-tab-btn.active {
+                background: #1ed760 !important;
+                color: #000000 !important;
+                border-color: #1ed760 !important;
+                font-weight: 700 !important;
+                box-shadow: 0 4px 16px rgba(30, 215, 96, 0.45) !important;
+            }
+
+            .we-home-quick-tab-btn.active:hover {
+                background: #1fdf64 !important;
+                color: #000000 !important;
+                border-color: #1fdf64 !important;
+                box-shadow: 0 6px 20px rgba(30, 215, 96, 0.6) !important;
+            }
+
+            .we-home-quick-tab-btn.active span {
+                color: #000000 !important;
+                font-weight: 800 !important;
+            }
+
+            /* Unmask native chip row container if present */
+            .gig6fTpg9wjxwnYIkuMg {
+                mask-image: none !important;
+                -webkit-mask-image: none !important;
+            }
+
+            .S2e77KLs4Na3yTiaIZgI:empty,
+            .YOYIfKkABUDGQ5vQmg7y:empty {
+                display: none !important;
+            }
+
 

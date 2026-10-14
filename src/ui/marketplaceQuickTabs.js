@@ -103,11 +103,7 @@ export function setupMarketplaceQuickTabs() {
             // Sync active state
             const currentTab = getActiveTab();
             container.querySelectorAll(".marketplace-quick-tab-btn").forEach(btn => {
-                if (btn.getAttribute("data-tab") === currentTab) {
-                    btn.classList.add("active");
-                } else {
-                    btn.classList.remove("active");
-                }
+                btn.classList.toggle("active", btn.getAttribute("data-tab") === currentTab);
             });
         }
     }
@@ -127,8 +123,7 @@ export function setupMarketplaceQuickTabs() {
     if (window.Spicetify && window.Spicetify.Platform && window.Spicetify.Platform.History) {
         window.Spicetify.Platform.History.listen((location) => {
             if (location.pathname && location.pathname.includes("marketplace")) {
-                setTimeout(updateQuickTabs, 100);
-                setTimeout(updateQuickTabs, 500);
+                setTimeout(updateQuickTabs, 80);
             }
         });
     }
