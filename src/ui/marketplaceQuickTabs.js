@@ -11,8 +11,13 @@ export function setupMarketplaceQuickTabs() {
 
     function getActiveTab() {
         try {
+            const nativeActive = document.querySelector('.marketplace-tabBar .marketplace-tabBar-active')?.closest('[data-tab]');
+            if (nativeActive) {
+                const tabAttr = nativeActive.getAttribute('data-tab');
+                if (tabAttr) return tabAttr;
+            }
             return localStorage.getItem("marketplace:active-tab") || "Extensions";
-        } catch (e) {
+        } catch (_) {
             return "Extensions";
         }
     }
@@ -20,20 +25,29 @@ export function setupMarketplaceQuickTabs() {
     function switchTab(tabId) {
         try {
             localStorage.setItem("marketplace:active-tab", tabId);
-        } catch (e) {}
+        } catch (_) {}
 
-        const nativeItem = document.querySelector(`.marketplace-tabBar-headerItem[data-tab="${tabId}"]`);
-        if (nativeItem) {
-            nativeItem.click();
-            return;
-        }
+        const nativeTabBar = document.querySelector(".marketplace-tabBar");
+        if (nativeTabBar) {
+            const item = nativeTabBar.querySelector(`.marketplace-tabBar-headerItem[data-tab="${tabId}"]`);
+            if (item) {
+                item.click();
+                const link = item.querySelector("a");
+                if (link) link.click();
+                return;
+            }
 
-        const dropdownOption = Array.from(document.querySelectorAll('.marketplace-tabBar .Dropdown-option')).find(
-            opt => (opt.textContent || "").trim() === tabId
-        );
-        if (dropdownOption) {
-            dropdownOption.click();
-            return;
+            const moreControl = nativeTabBar.querySelector(".Dropdown-control");
+            if (moreControl) {
+                moreControl.click();
+                setTimeout(() => {
+                    const option = Array.from(document.querySelectorAll(".Dropdown-option")).find(
+                        opt => (opt.textContent || "").trim().toLowerCase() === tabId.toLowerCase()
+                    );
+                    if (option) option.click();
+                }, 10);
+                return;
+            }
         }
 
         if (window.Spicetify && window.Spicetify.Platform && window.Spicetify.Platform.History) {
@@ -48,29 +62,18 @@ export function setupMarketplaceQuickTabs() {
         const header = document.querySelector(".marketplace-header");
         if (!header) return;
 
-        const strandedTabBar = document.querySelector(".marketplace-tabBar");
-        if (strandedTabBar && !header.contains(strandedTabBar)) {
-            const rightSide = header.querySelector(".marketplace-header__right");
-            if (rightSide) {
-                header.insertBefore(strandedTabBar, rightSide);
-            } else {
-                header.appendChild(strandedTabBar);
-            }
-            return;
-        }
-
-        const nativeTabBar = header.querySelector(".marketplace-tabBar");
+        const nativeTabBar = document.querySelector(".marketplace-tabBar");
         if (nativeTabBar) {
-            const moreDropdown = nativeTabBar.querySelector(".Dropdown-root");
-            const dataTabs = nativeTabBar.querySelectorAll(".marketplace-tabBar-headerItem[data-tab]");
-            if (moreDropdown || dataTabs.length < 5) {
-                const ul = nativeTabBar.querySelector(".marketplace-tabBar-header");
-                if (ul) {
-                    ul.style.minWidth = "450px";
-                    ul.style.width = "auto";
-                }
-            }
-            return;
+            nativeTabBar.classList.add("we-hidden-bridge");
+            nativeTabBar.style.setProperty("position", "absolute", "important");
+            nativeTabBar.style.setProperty("opacity", "0", "important");
+            nativeTabBar.style.setProperty("pointer-events", "none", "important");
+            nativeTabBar.style.setProperty("width", "1200px", "important");
+            nativeTabBar.style.setProperty("min-width", "1200px", "important");
+            nativeTabBar.style.setProperty("height", "0", "important");
+            nativeTabBar.style.setProperty("overflow", "hidden", "important");
+            nativeTabBar.style.setProperty("z-index", "-999", "important");
+            nativeTabBar.style.setProperty("left", "-9999px", "important");
         }
 
         let container = header.querySelector("#marketplace-quick-tabs-container");
@@ -99,6 +102,7 @@ export function setupMarketplaceQuickTabs() {
 
                 btn.addEventListener("click", (e) => {
                     e.preventDefault();
+                    e.stopPropagation();
                     ul.querySelectorAll(".marketplace-quick-tab-btn").forEach(b => b.classList.remove("active"));
                     btn.classList.add("active");
                     switchTab(tab.id);
@@ -119,7 +123,8 @@ export function setupMarketplaceQuickTabs() {
         } else {
             const currentTab = getActiveTab();
             container.querySelectorAll(".marketplace-quick-tab-btn").forEach(btn => {
-                btn.classList.toggle("active", btn.getAttribute("data-tab") === currentTab);
+                const isActive = btn.getAttribute("data-tab") === currentTab;
+                btn.classList.toggle("active", isActive);
             });
         }
     }
@@ -131,7 +136,7 @@ export function setupMarketplaceQuickTabs() {
             if (path && path.includes("marketplace")) {
                 updateQuickTabs();
             }
-        }, 300);
+        }, 250);
     }
 
     startWatcher();
@@ -139,7 +144,8 @@ export function setupMarketplaceQuickTabs() {
     if (window.Spicetify && window.Spicetify.Platform && window.Spicetify.Platform.History) {
         window.Spicetify.Platform.History.listen((location) => {
             if (location.pathname && location.pathname.includes("marketplace")) {
-                setTimeout(updateQuickTabs, 80);
+                setTimeout(updateQuickTabs, 50);
+                setTimeout(updateQuickTabs, 200);
             }
         });
     }

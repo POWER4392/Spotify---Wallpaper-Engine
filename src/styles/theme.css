@@ -1685,13 +1685,13 @@ body.we-scrolled .ap_ioWdVFWJkrRicJB8C * {
 }
 
 .marketplace-header {
-    background: rgba(18, 18, 18, 0.85) !important;
-    backdrop-filter: blur(24px) !important;
-    -webkit-backdrop-filter: blur(24px) !important;
-    border-radius: 12px !important;
+    background: rgba(18, 18, 18, 0.5) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-radius: 14px !important;
     padding: 8px 16px !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
@@ -1702,7 +1702,7 @@ body.we-scrolled .ap_ioWdVFWJkrRicJB8C * {
     top: 64px !important;
     z-index: 50 !important;
     overflow: visible !important;
-    transition: background 0.2s ease !important;
+    transition: all 0.2s ease !important;
 }
 
 .marketplace-header__left {
@@ -1910,55 +1910,55 @@ body.we-scrolled .ap_ioWdVFWJkrRicJB8C * {
     transform: scale(1.06) !important;
 }
 
-.marketplace-header .marketplace-tabBar,
-.marketplace-header .marketplace-tabBar-nav,
+.marketplace-header .marketplace-tabBar.we-hidden-bridge,
+.marketplace-tabBar.we-hidden-bridge,
+.main-topBar-topbarContentWrapper .marketplace-tabBar {
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    width: 1200px !important;
+    min-width: 1200px !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    z-index: -999 !important;
+}
+
+#marketplace-quick-tabs-container,
 .marketplace-header #marketplace-quick-tabs-container {
     -webkit-app-region: no-drag !important;
     pointer-events: auto !important;
-    width: auto !important;
-    min-width: 460px !important;
-    display: flex !important;
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
     flex: 1 1 auto !important;
-    z-index: 10 !important;
-    max-width: 100% !important;
+    z-index: 20 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
     overflow: visible !important;
 }
 
-.marketplace-header .marketplace-tabBar::-webkit-scrollbar,
-.marketplace-header #marketplace-quick-tabs-container::-webkit-scrollbar {
-    display: none !important;
-}
-
-.marketplace-header .marketplace-tabBar-header,
+.marketplace-quick-tabs-list,
 .marketplace-header .marketplace-quick-tabs-list {
-    display: flex !important;
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     list-style: none !important;
-    margin: 0 auto !important;
-    padding: 3px 6px !important;
-    background: rgba(255, 255, 255, 0.07) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    border-radius: 500px !important;
-    gap: 3px !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
-    flex-shrink: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 8px !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
     flex-wrap: nowrap !important;
     white-space: nowrap !important;
-    min-width: 450px !important;
+    pointer-events: auto !important;
 }
 
-.marketplace-header .marketplace-tabBar .marketplace-tabBar-headerItem:has(.Dropdown-root),
-.marketplace-header .marketplace-tabBar .Dropdown-root {
-    display: none !important;
-}
-
-.marketplace-header .marketplace-tabBar-headerItem,
+.marketplace-quick-tab-item,
 .marketplace-header .marketplace-quick-tab-item {
     -webkit-app-region: no-drag !important;
     display: inline-flex !important;
@@ -1966,54 +1966,70 @@ body.we-scrolled .ap_ioWdVFWJkrRicJB8C * {
     pointer-events: auto !important;
     flex-shrink: 0 !important;
     margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
 }
 
-.marketplace-header .marketplace-tabBar-headerItemLink,
+.marketplace-quick-tab-btn,
 .marketplace-header .marketplace-quick-tab-btn {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    outline: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
     border-radius: 500px !important;
-    color: #b3b3b3 !important;
-    padding: 5px 12px !important;
-    margin: 0 !important;
-    font-weight: 700 !important;
+    padding: 6px 16px !important;
     font-size: 13px !important;
-    letter-spacing: 0.2px !important;
-    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1) !important;
-    text-decoration: none !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1px !important;
+    cursor: pointer !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    background: transparent !important;
-    border: none !important;
-    cursor: pointer !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1) !important;
     user-select: none !important;
     white-space: nowrap !important;
     font-family: inherit !important;
+    pointer-events: auto !important;
 }
 
-.marketplace-header .marketplace-tabBar-headerItemLink:hover,
+.marketplace-quick-tab-btn:hover,
 .marketplace-header .marketplace-quick-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.16) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
     color: #ffffff !important;
-    background: rgba(255, 255, 255, 0.12) !important;
-    transform: translateY(-1px) !important;
+    transform: translateY(-1px) scale(1.02) !important;
 }
 
-.marketplace-header .marketplace-tabBar-active,
+.marketplace-quick-tab-btn:active,
+.marketplace-header .marketplace-quick-tab-btn:active {
+    transform: scale(0.97) !important;
+}
+
+.marketplace-quick-tab-btn.active,
 .marketplace-header .marketplace-quick-tab-btn.active {
     background: #ffffff !important;
     color: #000000 !important;
-    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.3) !important;
+    border-color: #ffffff !important;
+    font-weight: 700 !important;
+    box-shadow: 0 3px 12px rgba(255, 255, 255, 0.25) !important;
 }
 
-.marketplace-header .marketplace-tabBar-active:hover,
+.marketplace-quick-tab-btn.active:hover,
 .marketplace-header .marketplace-quick-tab-btn.active:hover {
     background: #f0f0f0 !important;
     color: #000000 !important;
+    border-color: #f0f0f0 !important;
 }
 
-.marketplace-header .marketplace-tabBar-active span,
+.marketplace-quick-tab-btn.active span,
 .marketplace-header .marketplace-quick-tab-btn.active span {
     color: #000000 !important;
-    font-weight: 800 !important;
+    font-weight: 700 !important;
 }
 
 #we-home-quick-tabs {
