@@ -798,12 +798,14 @@ function setupMarketplaceQuickTabs() {
     function switchTab(tabId) {
         try {
             localStorage.setItem("marketplace:active-tab", tabId);
-        } catch (e) {}
+        } catch (e) {}
+
         const nativeItem = document.querySelector(`.marketplace-tabBar-headerItem[data-tab="${tabId}"]`);
         if (nativeItem) {
             nativeItem.click();
             return;
-        }
+        }
+
         if (window.Spicetify && window.Spicetify.Platform && window.Spicetify.Platform.History) {
             const loc = window.Spicetify.Platform.History.location;
             if (loc && loc.pathname === "/marketplace") {
@@ -814,11 +816,11 @@ function setupMarketplaceQuickTabs() {
 
     function updateQuickTabs() {
         const header = document.querySelector(".marketplace-header");
-        if (!header) return;
+        if (!header) return;
+
         const nativeTabBar = header.querySelector(".marketplace-tabBar");
-        if (nativeTabBar) {
-            return;
-        }
+        if (nativeTabBar) return;
+
         let container = header.querySelector("#marketplace-quick-tabs-container");
         if (!container) {
             container = document.createElement("nav");
@@ -862,7 +864,7 @@ function setupMarketplaceQuickTabs() {
             } else {
                 header.appendChild(container);
             }
-        } else {
+        } else {
             const currentTab = getActiveTab();
             container.querySelectorAll(".marketplace-quick-tab-btn").forEach(btn => {
                 btn.classList.toggle("active", btn.getAttribute("data-tab") === currentTab);
@@ -1210,7 +1212,6 @@ function setupUI() {
                             <input type="checkbox" id="we-chk-autosync" ${settings.autoSync ? "checked" : ""} style="accent-color:#1ed760;" />Auto-sync wallpaper with Wallpaper Engine (Realtime)
                         </label>
 
-                        <!-- BANNER BACKGROUND BRIDGE SETUP & 1-CLICK ACTIVATOR -->
                         <div id="we-bridge-alert-box" style="display:none; background:rgba(234, 179, 8, 0.08); border:1px solid rgba(234, 179, 8, 0.28); border-radius:10px; padding:12px; margin-top:10px;">
                             <div style="margin-bottom:6px;">
                                 <b style="font-size:12px; color:#facc15;">Background Sync Service Required</b>
@@ -1867,12 +1868,10 @@ pause
     let autoReloadTimer = null;
 
     function handleOnline() {
-        console.log("[Wallpaper Engine] Network connection restored!");
         const errorTakeover = document.querySelector(
             "._NFePmYV2P6aLGrjLvuR, .EvmeKyemPmmbdjRZQezw, .FnUUCAJ79nf4_lZGH0DB"
         );
         if (errorTakeover && errorTakeover.style.display !== "none") {
-            console.log("[Wallpaper Engine] Connection back online! Reloading Spotify in 1s...");
             if (autoReloadTimer) clearTimeout(autoReloadTimer);
             autoReloadTimer = setTimeout(() => {
                 window.location.reload();
@@ -1909,8 +1908,6 @@ pause
     function enhanceModal(modalEl) {
         if (!modalEl || modalEl.dataset.weEnhanced) return;
         modalEl.dataset.weEnhanced = "true";
-
-        const backdrop = modalEl.closest("._NFePmYV2P6aLGrjLvuR") || modalEl.parentElement;
 
         modalEl.style.setProperty("position", "relative", "important");
 
@@ -1956,11 +1953,9 @@ pause
         const titleEl = modalEl.querySelector("h1");
         if (titleEl && !titleEl.dataset.weTextUpdated) {
             titleEl.dataset.weTextUpdated = "true";
-            if (isOffline) {
-                titleEl.textContent = "No Internet Connection (Mất kết nối mạng)";
-            } else {
-                titleEl.textContent = "Connection / Loading Notice";
-            }
+            titleEl.textContent = isOffline
+                ? "No Internet Connection (Mất kết nối mạng)"
+                : "Connection / Loading Notice";
         }
 
         const descEl = modalEl.querySelector("p");

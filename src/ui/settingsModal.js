@@ -40,7 +40,6 @@ export function openModal() {
                             <input type="checkbox" id="we-chk-autosync" ${settings.autoSync ? "checked" : ""} style="accent-color:#1ed760;" />Auto-sync wallpaper with Wallpaper Engine (Realtime)
                         </label>
 
-                        <!-- BANNER BACKGROUND BRIDGE SETUP & 1-CLICK ACTIVATOR -->
                         <div id="we-bridge-alert-box" style="display:none; background:rgba(234, 179, 8, 0.08); border:1px solid rgba(234, 179, 8, 0.28); border-radius:10px; padding:12px; margin-top:10px;">
                             <div style="margin-bottom:6px;">
                                 <b style="font-size:12px; color:#facc15;">Background Sync Service Required</b>

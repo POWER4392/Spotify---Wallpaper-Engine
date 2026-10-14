@@ -1,9 +1,3 @@
-/**
- * Spicetify Marketplace Quick Tab Switcher
- * Provides instant 1-click switching between Extensions, Themes, Snippets, Apps, Installed
- * directly inside the Marketplace header.
- */
-
 const MARKETPLACE_TABS = [
     { id: "Extensions", label: "Extens." },
     { id: "Themes", label: "Themes" },
@@ -28,14 +22,12 @@ export function setupMarketplaceQuickTabs() {
             localStorage.setItem("marketplace:active-tab", tabId);
         } catch (e) {}
 
-        // If native tabBar item exists, trigger its click
         const nativeItem = document.querySelector(`.marketplace-tabBar-headerItem[data-tab="${tabId}"]`);
         if (nativeItem) {
             nativeItem.click();
             return;
         }
 
-        // Fallback: reload or notify Spicetify history
         if (window.Spicetify && window.Spicetify.Platform && window.Spicetify.Platform.History) {
             const loc = window.Spicetify.Platform.History.location;
             if (loc && loc.pathname === "/marketplace") {
@@ -48,14 +40,9 @@ export function setupMarketplaceQuickTabs() {
         const header = document.querySelector(".marketplace-header");
         if (!header) return;
 
-        // If native tabBar is present, update active state on it and we're good
         const nativeTabBar = header.querySelector(".marketplace-tabBar");
-        if (nativeTabBar) {
-            // Already mounted by our patched Marketplace!
-            return;
-        }
+        if (nativeTabBar) return;
 
-        // If native tabBar is not yet mounted, provide our quick switcher container
         let container = header.querySelector("#marketplace-quick-tabs-container");
         if (!container) {
             container = document.createElement("nav");
@@ -100,7 +87,6 @@ export function setupMarketplaceQuickTabs() {
                 header.appendChild(container);
             }
         } else {
-            // Sync active state
             const currentTab = getActiveTab();
             container.querySelectorAll(".marketplace-quick-tab-btn").forEach(btn => {
                 btn.classList.toggle("active", btn.getAttribute("data-tab") === currentTab);

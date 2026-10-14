@@ -120,7 +120,6 @@
                 transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease !important;
             }
 
-            /* Hide Marketplace icon in topbar */
             #global-nav-bar button[aria-label="Marketplace"],
             #global-nav-bar button[aria-label="marketplace"],
             #global-nav-bar [aria-label*="Marketplace"],
@@ -373,12 +372,6 @@
                 border-radius: 6px !important;
             }
 
-            /* ==========================================================================
-               Modals, Dialogs & Offline Error Takeovers Fix
-               Prevents white/invisible popup when offline or disconnected
-               ========================================================================== */
-
-            /* 1. Backdrop / Modal Overlays */
             ._NFePmYV2P6aLGrjLvuR,
             [class*="_NFePmYV2P6aLGrjLvuR"],
             .MI75x8lBMXNep1yyjDEm,
@@ -393,7 +386,6 @@
                 z-index: 99999 !important;
             }
 
-            /* 2. All Dialog Containers & Error Takeovers (Solid dark premium styling) */
             .EvmeKyemPmmbdjRZQezw,
             [class*="EvmeKyemPmmbdjRZQezw"],
             .FnUUCAJ79nf4_lZGH0DB,
@@ -433,7 +425,6 @@
                 box-sizing: border-box !important;
             }
 
-            /* Ensure text inside modals is always visible, high contrast and clean */
             .EvmeKyemPmmbdjRZQezw *,
             [class*="EvmeKyemPmmbdjRZQezw"] *,
             .FnUUCAJ79nf4_lZGH0DB *,
@@ -463,7 +454,6 @@
                 margin: 0 0 18px 0 !important;
             }
 
-            /* 3. Action Buttons inside modals */
             ._fA4q2hl7XY7z6Sh5pRv,
             [class*="_fA4q2hl7XY7z6Sh5pRv"],
             .KubpT42JTL9IbK8ixLiC button,
@@ -501,7 +491,6 @@
                 transform: scale(0.98) !important;
             }
 
-            /* Secondary / Dismiss button in offline modal */
             .we-offline-dismiss-btn {
                 background: rgba(255, 255, 255, 0.1) !important;
                 color: #ffffff !important;
@@ -522,7 +511,6 @@
                 transform: scale(1.03) !important;
             }
 
-            /* Close 'X' button in top right of modal */
             .we-modal-corner-close {
                 position: absolute !important;
                 top: 14px !important;
@@ -545,7 +533,6 @@
                 transform: none !important;
             }
 
-            /* Context Menus, Create Menu & Popovers (Opaque, solid dark background) */
             .iokCRJjXyIjWZgavMwbm,
             [class*="iokCRJjXyIjWZgavMwbm"],
             #context-menu,
@@ -661,7 +648,6 @@
                 visibility: visible !important;
             }
 
-            /* Crisp text & titles in Right Sidebar (Now Playing View) */
             .Root__right-sidebar,
             aside#Desktop_PanelContainer_Id,
             aside._PCtpBj8KAibsMRyofjJ,
@@ -684,7 +670,6 @@
                 mask-image: none !important;
             }
 
-            /* Right sidebar top header title bar (Balanced, fixed, matching preview.png) */
             aside .WU7dTdoNA51czqGivj8T,
             [grid-area="right-sidebar"] .WU7dTdoNA51czqGivj8T {
                 position: sticky !important;
@@ -771,7 +756,6 @@
                 visibility: visible !important;
             }
 
-            /* Right sidebar track info row (title, artists, share & like buttons) */
             aside .f8pB2G3XUFXNNPQ_Ppxb,
             [grid-area="right-sidebar"] .f8pB2G3XUFXNNPQ_Ppxb {
                 display: flex !important;
@@ -805,7 +789,6 @@
                 width: 100% !important;
             }
 
-            /* Track Title in Right Sidebar (Bold, White, prominent) */
             aside .UxJZcpiOpOv5I0B1Tjdw,
             [grid-area="right-sidebar"] .UxJZcpiOpOv5I0B1Tjdw,
             aside [grid-area="title"],
@@ -855,7 +838,6 @@
                 text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
             }
 
-            /* Track Artists in Right Sidebar */
             aside .yPuQIWyOhCzYrdC7hhfw,
             [grid-area="right-sidebar"] .yPuQIWyOhCzYrdC7hhfw,
             aside [grid-area*="subtitle"],
@@ -903,7 +885,6 @@
                 text-decoration: underline !important;
             }
 
-            /* Action buttons on the right of Track info (Share & Add to library) */
             aside .wlaBAYQk3K1M_lNqOKNw,
             [grid-area="right-sidebar"] .wlaBAYQk3K1M_lNqOKNw,
             aside .da733NgUMo3KFbRwTBHD,
@@ -926,7 +907,6 @@
                 color: #ffffff !important;
             }
 
-            /* Solid crisp play button triangle (sharp black on Spotify green) */
             [data-encore-id="buttonPrimary"],
             [data-testid*="play-button"],
             .main-playButton-PlayButton {
@@ -1008,7 +988,6 @@
                 -webkit-backdrop-filter: blur(var(--we-sidebar-blur, 0px)) !important;
             }
 
-            /* Inner children of Left Sidebar transparent so opacity doesn't compound */
             #Desktop_LeftSidebar_Id nav,
             #Desktop_LeftSidebar_Id [data-testid="your-library-x"],
             #Desktop_LeftSidebar_Id .main-yourLibraryX-entryPoints,
@@ -1033,7 +1012,6 @@
                 -webkit-backdrop-filter: none !important;
             }
 
-            /* Right Sidebar Root Container */
             aside.main-buddyFeed-container,
             aside#Desktop_PanelContainer_Id,
             aside._PCtpBj8KAibsMRyofjJ,
@@ -1384,7 +1362,6 @@
                 border-bottom: none !important;
             }
 
-            /* Filter chips & Topbar content: always visible */
             .main-home-filterChipsContainer,
             [data-encore-id="chipList"],
             [data-encore-id="chip"],
@@ -1618,9 +1595,6 @@
             }
             .we-btn-sync:hover { background: #1fdf64; }
 
-            /* ==========================================================================
-               Spicetify Marketplace Quick Tab Switcher (Themes, Extens., Snippets, Apps, Installed)
-               ========================================================================== */
             .marketplace-header {
                 background: rgba(18, 18, 18, 0.75) !important;
                 backdrop-filter: blur(24px) !important;
@@ -1728,9 +1702,6 @@
                 font-weight: 800 !important;
             }
 
-            /* ==========================================================================
-               Home Feed Recommendation Quick Tabs (All, Music, Podcasts)
-               ========================================================================== */
             #we-home-quick-tabs {
                 position: sticky !important;
                 top: var(--we-tracklist-top, 64px) !important;
@@ -1825,7 +1796,6 @@
                 font-weight: 800 !important;
             }
 
-            /* Unmask native chip row container if present */
             .gig6fTpg9wjxwnYIkuMg {
                 mask-image: none !important;
                 -webkit-mask-image: none !important;
@@ -1835,5 +1805,3 @@
             .YOYIfKkABUDGQ5vQmg7y:empty {
                 display: none !important;
             }
-
-

@@ -1,11 +1,3 @@
-/**
- * Spotify Home / Recommendation Feed Quick Tab Filter Bar
- * Provides instant 1-click filter switching between:
- * - All (Tất cả): Main home feed ("/" or "/home")
- * - Music (Nhạc): Music recommendation subfeed ("/genre/0JQ5DAqbMKFSi39LMRT0Cy")
- * - Podcasts (Podcasts): Podcasts recommendation subfeed ("/genre/0JQ5DArNBzkmxXHCqFLx2J")
- */
-
 import { settings } from '../modules/settings.js';
 
 const RECOMMENDATION_TABS = [
