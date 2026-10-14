@@ -1871,18 +1871,18 @@ body.we-scrolled .ap_ioWdVFWJkrRicJB8C * {
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 500px !important;
     color: #ffffff !important;
-    padding: 7px 14px !important;
+    padding: 7px 12px !important;
     font-size: 13px !important;
     outline: none !important;
     box-sizing: border-box !important;
     transition: all 0.2s ease !important;
-    width: 180px !important;
+    width: 150px !important;
 }
 
 .marketplace-header .searchbar-bar:focus {
     background: rgba(255, 255, 255, 0.14) !important;
     border-color: rgba(255, 255, 255, 0.3) !important;
-    width: 220px !important;
+    width: 190px !important;
 }
 
 .marketplace-header-icon-button {
@@ -1916,7 +1916,7 @@ body.we-scrolled .ap_ioWdVFWJkrRicJB8C * {
     -webkit-app-region: no-drag !important;
     pointer-events: auto !important;
     width: auto !important;
-    min-width: 440px !important;
+    min-width: 460px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -1939,18 +1939,18 @@ body.we-scrolled .ap_ioWdVFWJkrRicJB8C * {
     justify-content: center !important;
     list-style: none !important;
     margin: 0 auto !important;
-    padding: 4px 6px !important;
+    padding: 3px 6px !important;
     background: rgba(255, 255, 255, 0.07) !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 500px !important;
-    gap: 4px !important;
+    gap: 3px !important;
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
     flex-shrink: 0 !important;
     flex-wrap: nowrap !important;
     white-space: nowrap !important;
-    min-width: 400px !important;
+    min-width: 450px !important;
 }
 
 .marketplace-header .marketplace-tabBar .marketplace-tabBar-headerItem:has(.Dropdown-root),
@@ -1972,7 +1972,7 @@ body.we-scrolled .ap_ioWdVFWJkrRicJB8C * {
 .marketplace-header .marketplace-quick-tab-btn {
     border-radius: 500px !important;
     color: #b3b3b3 !important;
-    padding: 6px 14px !important;
+    padding: 5px 12px !important;
     margin: 0 !important;
     font-weight: 700 !important;
     font-size: 13px !important;

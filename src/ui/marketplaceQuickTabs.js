@@ -28,6 +28,14 @@ export function setupMarketplaceQuickTabs() {
             return;
         }
 
+        const dropdownOption = Array.from(document.querySelectorAll('.marketplace-tabBar .Dropdown-option')).find(
+            opt => (opt.textContent || "").trim() === tabId
+        );
+        if (dropdownOption) {
+            dropdownOption.click();
+            return;
+        }
+
         if (window.Spicetify && window.Spicetify.Platform && window.Spicetify.Platform.History) {
             const loc = window.Spicetify.Platform.History.location;
             if (loc && loc.pathname === "/marketplace") {
@@ -55,8 +63,12 @@ export function setupMarketplaceQuickTabs() {
         if (nativeTabBar) {
             const moreDropdown = nativeTabBar.querySelector(".Dropdown-root");
             const dataTabs = nativeTabBar.querySelectorAll(".marketplace-tabBar-headerItem[data-tab]");
-            if (moreDropdown && dataTabs.length < 2) {
-                window.dispatchEvent(new Event("resize"));
+            if (moreDropdown || dataTabs.length < 5) {
+                const ul = nativeTabBar.querySelector(".marketplace-tabBar-header");
+                if (ul) {
+                    ul.style.minWidth = "450px";
+                    ul.style.width = "auto";
+                }
             }
             return;
         }
