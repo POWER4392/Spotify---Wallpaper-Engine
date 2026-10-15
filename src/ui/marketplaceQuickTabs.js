@@ -65,15 +65,15 @@ export function setupMarketplaceQuickTabs() {
         const nativeTabBar = document.querySelector(".marketplace-tabBar");
         if (nativeTabBar) {
             nativeTabBar.classList.add("we-hidden-bridge");
-            nativeTabBar.style.setProperty("position", "absolute", "important");
+            nativeTabBar.style.setProperty("position", "fixed", "important");
+            nativeTabBar.style.setProperty("top", "0", "important");
+            nativeTabBar.style.setProperty("left", "0", "important");
             nativeTabBar.style.setProperty("opacity", "0", "important");
             nativeTabBar.style.setProperty("pointer-events", "none", "important");
-            nativeTabBar.style.setProperty("width", "1200px", "important");
-            nativeTabBar.style.setProperty("min-width", "1200px", "important");
-            nativeTabBar.style.setProperty("height", "0", "important");
+            nativeTabBar.style.setProperty("width", "0px", "important");
+            nativeTabBar.style.setProperty("height", "0px", "important");
             nativeTabBar.style.setProperty("overflow", "hidden", "important");
-            nativeTabBar.style.setProperty("z-index", "-999", "important");
-            nativeTabBar.style.setProperty("left", "-9999px", "important");
+            nativeTabBar.style.setProperty("z-index", "-9999", "important");
         }
 
         let container = header.querySelector("#marketplace-quick-tabs-container");
