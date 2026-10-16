@@ -1493,7 +1493,6 @@ button[data-testid*="chevron"],
 [class*="Zsz_4IzlyaFvu7jBCd06"],
 [data-testid="overscroll-background"],
 [data-testid="background-overlay"],
-[data-testid="entity-header"],
 .AJjP1RzhySWiLWVcLlNA,
 .Xx4EJR6ZWcW7jro0XDK2,
 [class*="Xx4EJR6ZWcW7jro0XDK2"],
@@ -1519,9 +1518,6 @@ button[data-testid*="chevron"],
 [class*="epX9OZEs2WWSRuky6bIs"],
 .ob4NiMt7UN8LQ1UniBIx,
 [class*="ob4NiMt7UN8LQ1UniBIx"],
-[data-testid="action-bar"],
-[data-testid="artist-page"],
-[data-seamless-gradient],
 .main-view-container__mh-footer-container,
 [class*="mh-footer-container"],
 .mdoyl18mLQqK77IPy1wh,
@@ -1535,6 +1531,172 @@ button[data-testid*="chevron"],
     pointer-events: none !important;
 }
 
+/* 1. ARTIST COVER PHOTO (ẢNH BÌA NGHỆ SĨ) - Visible with smooth gradient fade & zero click blocking */
+.before-scroll-node {
+    display: block !important;
+    pointer-events: none !important;
+    transition: opacity 0.25s ease, transform 0.1s linear !important;
+    will-change: transform, opacity;
+}
+
+.before-scroll-node *,
+.MlWLm9_5qALi6Ay0_OCr,
+[class*="MlWLm9_5qALi6Ay0_OCr"],
+.FNyVAJwiyJvKSs7fgcmI,
+[class*="FNyVAJwiyJvKSs7fgcmI"],
+.b7x0AwQ51vLACMAHB71B,
+[class*="b7x0AwQ51vLACMAHB71B"],
+[data-testid="background-image"] {
+    pointer-events: none !important;
+}
+
+/* Ensure cover photo renders visibly with smooth bottom fade into wallpaper */
+.MlWLm9_5qALi6Ay0_OCr,
+[class*="MlWLm9_5qALi6Ay0_OCr"],
+.FNyVAJwiyJvKSs7fgcmI,
+[class*="FNyVAJwiyJvKSs7fgcmI"] {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.95) 50%, rgba(0, 0, 0, 0.5) 80%, rgba(0, 0, 0, 0) 100%) !important;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.95) 50%, rgba(0, 0, 0, 0.5) 80%, rgba(0, 0, 0, 0) 100%) !important;
+}
+
+.b7x0AwQ51vLACMAHB71B,
+[class*="b7x0AwQ51vLACMAHB71B"],
+.L0UgUY1nWxdZ3XyrJNMt,
+[class*="L0UgUY1nWxdZ3XyrJNMt"],
+[data-testid="background-image"] {
+    display: block !important;
+    opacity: 0.95 !important;
+    visibility: visible !important;
+}
+
+/* HIDE ONLY FULLSCREEN OVERLAY & SOLID BLACK GRADIENT THAT BLOCK CLICKS */
+.P1kwly6O5plr1VQVdOLV,
+[data-testid="overscroll-background"],
+.venMPE3QitySGonlITLf:after,
+.AE3dcjFNJ9068_vrnLB6:after {
+    display: none !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* 2. ARTIST HEADER - Ensure full visibility, layout, and artist name */
+[data-testid="entity-header"],
+.bXvkHCNOXigrpicAqmgd,
+[class*="bXvkHCNOXigrpicAqmgd"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+[data-testid="entity-header"] *,
+.bXvkHCNOXigrpicAqmgd * {
+    visibility: visible !important;
+}
+
+/* Make header background gradients transparent without hiding header content */
+.hbNOZbHD3bPL3OcHQWNn,
+[class*="hbNOZbHD3bPL3OcHQWNn"],
+.uP1rcUSIWCFaOZaoH0ZG,
+[class*="uP1rcUSIWCFaOZaoH0ZG"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    pointer-events: none !important;
+}
+
+/* 3. ARTIST CONTENT & ACTION BAR - Transparent backgrounds, natural grid layout */
+.GECIboaMmkIqHDKwQ3vR,
+[class*="GECIboaMmkIqHDKwQ3vR"],
+[data-testid="artist-page"],
+.NH0t2tTyh4gSbg5Jd40w,
+[class*="NH0t2tTyh4gSbg5Jd40w"],
+.z0ow24AABLbFsQt7mYDF,
+[class*="z0ow24AABLbFsQt7mYDF"],
+.u9i__FHAyXJecXMPsrLQ,
+[class*="u9i__FHAyXJecXMPsrLQ"],
+.ErNDIeqOIhQ9kGfrxqS_,
+[class*="ErNDIeqOIhQ9kGfrxqS_"],
+.I5gPGkX7nJaKDMRuOyf2,
+[class*="I5gPGkX7nJaKDMRuOyf2"] {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+[data-testid="action-bar"],
+[data-testid="action-bar-row"] {
+    pointer-events: auto !important;
+}
+
+[data-testid="action-bar"] *,
+[data-testid="action-bar-row"] * {
+    pointer-events: auto !important;
+}
+
+/* 4. TRACKLIST ROWS - Fully clickable & clear hover feedback */
+[role="row"],
+.xwwlUJUZLpjPnZByq04Y,
+[data-testid="tracklist-row"],
+.main-trackList-trackListRow,
+.main-trackList-row {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    background: transparent !important;
+    transition: background-color 0.12s ease !important;
+}
+
+[role="row"] *,
+.xwwlUJUZLpjPnZByq04Y *,
+[data-testid="tracklist-row"] *,
+.main-trackList-trackListRow * {
+    pointer-events: auto !important;
+}
+
+[role="row"]:hover,
+.xwwlUJUZLpjPnZByq04Y:hover,
+[data-testid="artist-page"] [role="row"]:hover,
+[data-testid="tracklist-row"]:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+[role="row"]:active,
+.xwwlUJUZLpjPnZByq04Y:active,
+[data-testid="artist-page"] [role="row"]:active,
+[data-testid="tracklist-row"]:active {
+    background-color: rgba(255, 255, 255, 0.22) !important;
+}
+
+/* 5. TRACK PLAY / PAUSE BUTTON ON HOVER */
+[role="row"] .l9kmLysnmcseyWh8xf0E,
+[role="row"] button[aria-label*="Play"],
+[role="row"] button[aria-label*="Pause"],
+[role="row"] button[aria-label*="Phát"],
+.xwwlUJUZLpjPnZByq04Y .l9kmLysnmcseyWh8xf0E {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+[role="row"]:hover .l9kmLysnmcseyWh8xf0E,
+.xwwlUJUZLpjPnZByq04Y:hover .l9kmLysnmcseyWh8xf0E,
+[role="row"]:focus-within .l9kmLysnmcseyWh8xf0E,
+.xwwlUJUZLpjPnZByq04Y:focus-within .l9kmLysnmcseyWh8xf0E {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+    pointer-events: auto !important;
+}
+
+[role="row"]:hover .Aa8Q1IvIum3HH4nBBx9U,
+.xwwlUJUZLpjPnZByq04Y:hover .Aa8Q1IvIum3HH4nBBx9U {
+    opacity: 0 !important;
+}
+
 .sxMpFt17cJVTesE9u6fX,
 [class*="sxMpFt17cJVTesE9u6fX"],
 .oCSWtOAH_CgjIsi_H_PS,
@@ -1545,11 +1707,25 @@ button[data-testid*="chevron"],
     pointer-events: none !important;
 }
 
+body.we-scrolled .before-scroll-node,
+body.we-scrolled .before-scroll-node *,
+body.we-scrolled [data-testid="background-image"],
+body.we-scrolled .MlWLm9_5qALi6Ay0_OCr,
+body.we-scrolled [class*="MlWLm9_5qALi6Ay0_OCr"],
+body.we-scrolled .GfTKUTxvt__lBLQKmG9m,
+body.we-scrolled [class*="GfTKUTxvt__lBLQKmG9m"],
+body.we-scrolled .b7x0AwQ51vLACMAHB71B,
+body.we-scrolled [class*="b7x0AwQ51vLACMAHB71B"],
+body.we-scrolled .P1kwly6O5plr1VQVdOLV,
+body.we-scrolled [class*="P1kwly6O5plr1VQVdOLV"],
+body.we-scrolled [data-testid="overscroll-background"],
 body.we-scrolled .wT74N9ojpAVDTx_TugfQ,
 body.we-scrolled [class*="wT74N9ojpAVDTx_TugfQ"],
 body.we-scrolled .Zsz_4IzlyaFvu7jBCd06,
 body.we-scrolled [class*="Zsz_4IzlyaFvu7jBCd06"],
-body.we-scrolled [data-testid="overscroll-background"] {
+body.we-scrolled .main-entityHeader-backgroundColor,
+body.we-scrolled .main-entityHeader-overlay,
+body.we-scrolled .main-entityHeader-gradient {
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;

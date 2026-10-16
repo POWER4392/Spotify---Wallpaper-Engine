@@ -7,22 +7,27 @@ import { setupHomeFeedQuickTabs } from './ui/homeFeedQuickTabs.js';
 import { setupOfflineHandler } from './modules/offlineHandler.js';
 
 export function injectStyles(cssContent) {
-    if (document.getElementById("we-styles")) return;
-    const style = document.createElement("style");
-    style.id = "we-styles";
-    style.textContent = cssContent;
-    const target = document.head || document.documentElement;
-    if (target) {
-        target.appendChild(style);
+    let style = document.getElementById("we-styles");
+    if (!style) {
+        style = document.createElement("style");
+        style.id = "we-styles";
+        const target = document.head || document.documentElement;
+        if (target) {
+            target.appendChild(style);
+        }
     }
+    style.textContent = cssContent;
 }
 
 export function initExtension(cssContent) {
+    try {
+        injectStyles(cssContent);
+    } catch (_) {}
+
     if (window.__WALLPAPER_ENGINE_INITIALIZED__) return;
     window.__WALLPAPER_ENGINE_INITIALIZED__ = true;
 
     try {
-        injectStyles(cssContent);
         setupOfflineHandler();
     } catch (_) {}
 

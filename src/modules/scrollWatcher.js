@@ -8,32 +8,6 @@ export function setupScrollWatcher() {
             document.documentElement.style.setProperty('--we-page-color', pageColor);
         }
 
-        let isPastBanner = false;
-        const actionBar = document.querySelector(
-            '.main-actionBar-ActionBarRow, [data-testid="action-bar-row"]'
-        );
-        const mainViewContainer = document.querySelector(
-            '.Root__main-view, [grid-area="main-view"], .main-view-container'
-        );
-
-        if (actionBar && mainViewContainer && mainViewContainer.contains(actionBar)) {
-            const actionRect = actionBar.getBoundingClientRect();
-            if (actionRect.bottom <= 64) {
-                isPastBanner = true;
-            }
-        } else {
-            const scrollContainers = document.querySelectorAll(
-                '.Root__main-view .os-viewport, .Root__main-view [data-overlayscrollbars-viewport], .main-view-container__scroll-node, [grid-area="main-view"] [data-overlayscrollbars-viewport]'
-            );
-            scrollContainers.forEach(c => {
-                if (c && typeof c.scrollTop === 'number' && c.scrollTop > 320) {
-                    isPastBanner = true;
-                }
-            });
-        }
-
-        document.body.classList.toggle("we-scrolled", isPastBanner);
-
         let targetTop = 64;
         const topBarEl = document.querySelector('header[data-testid="topbar"], .main-topBar-container, #global-nav-bar');
         if (topBarEl) {
@@ -41,6 +15,49 @@ export function setupScrollWatcher() {
             if (r.height > 0) targetTop = Math.round(r.height);
         }
         document.documentElement.style.setProperty('--we-tracklist-top', targetTop + 'px');
+
+        let maxScrollTop = 0;
+        const scrollContainers = document.querySelectorAll(
+            '.main-view-container__scroll-node, .Root__main-view .os-viewport, .Root__main-view [data-overlayscrollbars-viewport], [grid-area="main-view"] [data-overlayscrollbars-viewport]'
+        );
+        scrollContainers.forEach(c => {
+            if (c && typeof c.scrollTop === 'number' && c.scrollTop > maxScrollTop) {
+                maxScrollTop = c.scrollTop;
+            }
+        });
+
+        let isPastBanner = false;
+        const actionBar = document.querySelector(
+            '.main-actionBar-ActionBarRow, [data-testid="action-bar-row"], [data-testid="action-bar"]'
+        );
+        const mainViewContainer = document.querySelector(
+            '.Root__main-view, [grid-area="main-view"], .main-view-container'
+        );
+
+        if (actionBar && mainViewContainer && mainViewContainer.contains(actionBar)) {
+            const actionRect = actionBar.getBoundingClientRect();
+            if (actionRect.top <= targetTop + 16 || actionRect.bottom <= targetTop + 40 || maxScrollTop > 240) {
+                isPastBanner = true;
+            }
+        } else {
+            if (maxScrollTop > 200) {
+                isPastBanner = true;
+            }
+        }
+
+        document.body.classList.toggle("we-scrolled", isPastBanner);
+
+        const beforeNode = document.querySelector('.before-scroll-node');
+        if (beforeNode) {
+            if (maxScrollTop > 0) {
+                const fadeProgress = Math.min(1, maxScrollTop / 240);
+                beforeNode.style.transform = `translateY(${-Math.round(maxScrollTop)}px)`;
+                beforeNode.style.opacity = (1 - fadeProgress).toFixed(2);
+            } else {
+                beforeNode.style.transform = '';
+                beforeNode.style.opacity = '';
+            }
+        }
 
         let isTracklistStuck = false;
         const trackHeader = document.querySelector(
@@ -107,6 +124,11 @@ export function setupScrollWatcher() {
     try {
         if (window.Spicetify?.Platform?.History?.listen) {
             window.Spicetify.Platform.History.listen(() => {
+                const beforeNode = document.querySelector('.before-scroll-node');
+                if (beforeNode) {
+                    beforeNode.style.transform = '';
+                    beforeNode.style.opacity = '';
+                }
                 setTimeout(syncColorAndScroll, 100);
             });
         }
