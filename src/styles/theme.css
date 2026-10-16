@@ -132,7 +132,24 @@ section,
 [data-testid="main-view"],
 .main-entityHeader-backgroundColor,
 .main-entityHeader-overlay,
+.main-entityHeader-gradient,
 .main-actionBarBackground-background,
+.kMaYBahSBLOnErF7DLR2,
+[class*="kMaYBahSBLOnErF7DLR2"],
+.IfBZ5VdI_2nwDMl4H6Yh,
+[class*="IfBZ5VdI_2nwDMl4H6Yh"],
+.r8bczAWCEgb9_L0iyIcc,
+[class*="r8bczAWCEgb9_L0iyIcc"],
+.xCEkyVpabf3oVGmFQVej,
+[class*="xCEkyVpabf3oVGmFQVej"],
+.jTuahgNncRCCfJfiJwQi,
+[class*="jTuahgNncRCCfJfiJwQi"],
+.lcKPSRpbeFvTvyLrI36l,
+[class*="lcKPSRpbeFvTvyLrI36l"],
+.jZyXBWWqigs2RWA0z7ed,
+[class*="jZyXBWWqigs2RWA0z7ed"],
+.Yt3NCcQ9MNQ6msx88cPe,
+[class*="Yt3NCcQ9MNQ6msx88cPe"],
 [data-testid="home-page"],
 .main-shelf-shelf,
 .main-trackList-trackListHeader,
@@ -144,6 +161,14 @@ section,
     background-image: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
+}
+
+.kMaYBahSBLOnErF7DLR2,
+[class*="kMaYBahSBLOnErF7DLR2"],
+.IfBZ5VdI_2nwDMl4H6Yh,
+[class*="IfBZ5VdI_2nwDMl4H6Yh"] {
+    display: none !important;
+    opacity: 0 !important;
 }
 
 .rLb4jRJmAjuDMN1b9Atw,
@@ -968,6 +993,37 @@ aside .da733NgUMo3KFbRwTBHD button,
     opacity: 1 !important;
 }
 
+.CcRlyOo0u4fhd31I7iZq,
+[class*="CcRlyOo0u4fhd31I7iZq"],
+.view-homeShortcutsGrid-shortcut,
+[data-testid="shortcut-item"] {
+    background: rgba(255, 255, 255, 0.08) !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 6px !important;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1) !important;
+}
+
+.CcRlyOo0u4fhd31I7iZq:hover,
+[class*="CcRlyOo0u4fhd31I7iZq"]:hover,
+.view-homeShortcutsGrid-shortcut:hover,
+[data-testid="shortcut-item"]:hover {
+    background: rgba(255, 255, 255, 0.16) !important;
+    background-color: rgba(255, 255, 255, 0.16) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+.CcRlyOo0u4fhd31I7iZq .pzmmqs_lMNAyiEsU3F8h,
+.CcRlyOo0u4fhd31I7iZq .F1CQ1Rh99zSbmmsaGuHT,
+.CcRlyOo0u4fhd31I7iZq .lfN014YqRpGe58bBgAGo,
+.CcRlyOo0u4fhd31I7iZq [data-encore-id="buttonPrimary"],
+[class*="CcRlyOo0u4fhd31I7iZq"] .pzmmqs_lMNAyiEsU3F8h,
+[class*="CcRlyOo0u4fhd31I7iZq"] .F1CQ1Rh99zSbmmsaGuHT,
+[class*="CcRlyOo0u4fhd31I7iZq"] .lfN014YqRpGe58bBgAGo,
+[class*="CcRlyOo0u4fhd31I7iZq"] [data-encore-id="buttonPrimary"],
 [data-testid="shortcut-item"] [data-encore-id="buttonPrimary"],
 [data-testid="shortcut-item"] [data-testid*="play-button"],
 [data-testid="shortcut-item"] [class*="PlayButton"],
@@ -995,6 +1051,14 @@ aside .da733NgUMo3KFbRwTBHD button,
     transform: translateY(4px) scale(0.9) !important;
 }
 
+.CcRlyOo0u4fhd31I7iZq:hover .pzmmqs_lMNAyiEsU3F8h,
+.CcRlyOo0u4fhd31I7iZq:hover .F1CQ1Rh99zSbmmsaGuHT,
+.CcRlyOo0u4fhd31I7iZq:hover .lfN014YqRpGe58bBgAGo,
+.CcRlyOo0u4fhd31I7iZq:hover [data-encore-id="buttonPrimary"],
+[class*="CcRlyOo0u4fhd31I7iZq"]:hover .pzmmqs_lMNAyiEsU3F8h,
+[class*="CcRlyOo0u4fhd31I7iZq"]:hover .F1CQ1Rh99zSbmmsaGuHT,
+[class*="CcRlyOo0u4fhd31I7iZq"]:hover .lfN014YqRpGe58bBgAGo,
+[class*="CcRlyOo0u4fhd31I7iZq"]:hover [data-encore-id="buttonPrimary"],
 [data-testid="shortcut-item"]:hover [data-encore-id="buttonPrimary"],
 [data-testid="shortcut-item"]:hover [data-testid*="play-button"],
 [data-testid="shortcut-item"]:hover [class*="PlayButton"],
@@ -1249,14 +1313,14 @@ footer,
     visibility: visible !important;
 }
 
-.encore-bright-accent-set,
-.encore-dark-theme .encore-bright-accent-set,
-.encore-light-theme .encore-bright-accent-set,
-[class*="encore-bright-accent-set"],
 .D6xLplfPDUxExc6A2cjq,
 [class*="D6xLplfPDUxExc6A2cjq"],
 .eHCihqz5SGW_TqcbF7R8,
 [class*="eHCihqz5SGW_TqcbF7R8"],
+aside[data-testid="now-playing-bar"] [class*="D6xLplfPDUxExc6A2cjq"],
+aside[data-testid="now-playing-bar"] .D6xLplfPDUxExc6A2cjq,
+aside[data-testid="now-playing-bar"] [class*="connect-bar"],
+aside[data-testid="now-playing-bar"] [class*="ConnectBar"],
 .main-connectBar-connectBar,
 [class*="main-connectBar-"],
 [class*="connect-bar"],
@@ -1281,8 +1345,6 @@ footer,
     color: #000000 !important;
 }
 
-.encore-bright-accent-set *,
-[class*="encore-bright-accent-set"] *,
 .D6xLplfPDUxExc6A2cjq *,
 [class*="D6xLplfPDUxExc6A2cjq"] *,
 .eHCihqz5SGW_TqcbF7R8 *,
